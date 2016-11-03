@@ -21,11 +21,12 @@ var client = new irc.Client(settings.server, settings.botName, {
 /* when we receive a message from IRC, forward it off to laravel */
 client.addListener('message', function (from, to, message) {
 	console.log(from, to, message);
-	request.post(settings.api_server_address, {'message':message,'sender':from});
+	request.post(settings.api_server_address, {'message':message,'sender':from,'token':settings.internal_token});
 });
 
 /* when we receive a message (to send) from laravel, send it off to IRC */
 app.post('/msg', function (req, res) {
+  //TODO: authenticate csrf using settings.internal_token	
   client.say("#cheeseburger97", req.body.msg);
   res.send(200);
 })
