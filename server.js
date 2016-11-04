@@ -13,7 +13,7 @@ app.use(bodyParser.urlencoded({     // to support URL-encoded bodies
 
 var client = new irc.Client(settings.server, settings.botName, {
   channels: [settings.channels + " " + settings.password],
-  debug: false,
+  debug: true,
   password: settings.password,
   username: settings.botName,
 });
@@ -27,7 +27,7 @@ client.addListener('message', function (from, to, message) {
 /* when we receive a message (to send) from laravel, send it off to IRC */
 app.post('/msg', function (req, res) {
   //TODO: authenticate csrf using settings.internal_token	
-  client.say("#cheeseburger97", req.body.msg);
+  client.say(settings.channels[0], req.body.msg);
   res.send(200);
 })
 
