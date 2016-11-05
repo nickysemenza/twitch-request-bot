@@ -28,7 +28,7 @@ export default class MainNavBar extends Component {
               <MenuItem eventKey={3.3} onClick={() => { this.props.logout(); }}>Log out</MenuItem>
             </NavDropdown>
               :
-            <LinkContainer to="/signin"><NavItem eventKey={4}>Sign In</NavItem></LinkContainer>
+            <NavItem eventKey={4} onClick={() => { this.props.signin(); }}>Sign In</NavItem>
             }
           </Nav>
         </Navbar.Collapse>

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { logoutUser } from '../actions/users';
+import { signInUser } from '../actions/users';
 import MainNavBar from '../components/Nav.js';
 
 
@@ -17,6 +18,9 @@ const mapDispatchToProps = (dispatch, ownProps) => {
   return {
     logout: () => {
       dispatch(logoutUser());
+    },
+    signin: () => {
+      dispatch(signInUser());
     }
   }
 }
