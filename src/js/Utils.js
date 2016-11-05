@@ -50,7 +50,7 @@ function completeRequest(route,config) {
 }
 export function APIget(route)
 {
-  let token = localStorage.getItem('id_token') || null;
+  let token = state.jwt_token;
   if(API_VERBOSE)
   {
     console.group('APIRequest: GET '+route);
@@ -67,7 +67,7 @@ export function APIget(route)
 }
 export function APIput(route, data)
 {
-  let token = localStorage.getItem('id_token') || null;
+  let token = state.jwt_token;
   if(API_VERBOSE)
   {
     console.group('APIRequest: PUT '+route);

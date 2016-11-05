@@ -22,7 +22,7 @@ export default class MainNavBar extends Component {
             {
               this.props.isAuthenticated
                 ?
-             <NavDropdown eventKey={3} title={this.props.user.data.username} id="basic-nav-dropdown">
+             <NavDropdown eventKey={3} title={this.props.username} id="basic-nav-dropdown">
               <LinkContainer to="/settings"><MenuItem eventKey={3.1}>Settings</MenuItem></LinkContainer>
               <MenuItem divider />
               <MenuItem eventKey={3.3} onClick={() => { this.props.logout(); }}>Log out</MenuItem>

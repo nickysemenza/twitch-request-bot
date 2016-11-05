@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { fetchMe } from '../actions/users';
-import UserSettings from '../components/UserSettings.js';
+import { fetchMe, signInUser } from '../actions/users';
+import Homepage from '../components/Homepage.js';
 
 function mapStateToProps(state) {
   return {
@@ -13,8 +13,11 @@ const mapDispatchToProps = (dispatch, ownProps) => {
   return {
     loadData: () => {
       dispatch(fetchMe());
+    },
+    signin: () => {
+      dispatch(signInUser());
     }
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(UserSettings);
+export default connect(mapStateToProps, mapDispatchToProps)(Homepage);

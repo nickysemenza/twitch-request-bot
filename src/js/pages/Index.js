@@ -1,14 +1,16 @@
 import React, { Component } from 'react';
 import {Link} from 'react-router';
 import HeaderContainer from '../containers/HeaderContainer';
+import HomepageContainer from '../containers/HomepageContainer';
 class Index extends Component {
   render() {
     return (
       <div>
         <HeaderContainer/>
-        <div className="homepage">
-          <h1 style={{fontSize: '80px'}}>hello.</h1>
-          </div>
+        <HomepageContainer/>
+        {/*<div className="homepage">*/}
+          {/*<h1 style={{fontSize: '80px'}}>hello.</h1>*/}
+        {/*</div>*/}
       </div>
     );
   }
