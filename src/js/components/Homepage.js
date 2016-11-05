@@ -19,6 +19,7 @@ export default class Homepage extends Component {
               <button className="button-primary-wide" onClick={this.props.loadDataUser}>Reload User</button>
               <br/>
               <button className="button-primary-wide" onClick={this.props.loadSongQueue}>Reload SongQueue</button>
+              <p>Now playing: {nowPlaying.title}</p>
               <SongQueueVideo song={nowPlaying.youtube_id} autoplay={this.props.isAdmin}/>
 
             </Col>
