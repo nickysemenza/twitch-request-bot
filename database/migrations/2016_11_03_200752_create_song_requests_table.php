@@ -16,11 +16,12 @@ class CreateSongRequestsTable extends Migration
             $table->increments('id');
             $table->integer('user_id')->unsigned();
             $table->foreign('user_id')->references('id')->on('users');
-            $table->string('youtube_url');
+            $table->string('title')->nullable();
+            $table->string('youtube_id');
             $table->string('notes');
             $table->string('instrument');
             $table->boolean('priority')->default(false);
-            $table->boolean('played')->default(false);
+            $table->integer('status')->default(0);
             $table->timestamps();
         });
     }

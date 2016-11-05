@@ -1,19 +1,22 @@
 <?php namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use App\Role;
+use App\SongRequest;
 use Illuminate\Http\Request;
 use App\User;
 use Log;
 use JWTAuth;
 class GeneralController extends Controller {
+    public function __construct() {
+//        $this->middleware('jwt.auth', ['except' => ['twitchAuthCallback','test']]);
+    }
     public function test() {
         return "hi";
     }
     public function twitchAuthCallback(Request $request)
 	{
-		// $code = $request->all()['code'];
-		// $token = TwitchAPIController::getToken($code);
-
+		$code = $request->all()['code'];
+		$token = TwitchAPIController::getToken($code);
         $username = TwitchAPIController::getUsername($token);
 		$user =  User::firstOrCreate(['username'=>$username]);
 
@@ -25,6 +28,8 @@ class GeneralController extends Controller {
 
         Log::info("issuing jwt for user ".$user->id.": ".$jwt);
 		header("Location: ".env('FRONTEND_ADDRESS')."/auth?jwt=".$jwt);
-		// return $jwt;
 	}
+	public function getSongQueue() {
+	    return SongRequest::where('status','!=',2)->orderBy('priority','DESC')->get();
+    }
 }

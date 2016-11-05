@@ -15,7 +15,7 @@ class CreateUsersTable extends Migration
         Schema::create('users', function (Blueprint $table) {
             $table->increments('id');
             $table->string('username')->unique();
-            $table->integer('credits');
+            $table->integer('credits')->default(0);
             $table->boolean('is_subscriber')->default(false);
             $table->timestamps();
         });
