@@ -13,10 +13,6 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::get('/user', function (Request $request) {
-    return $request->user();
-})->middleware('auth:api');
+Route::get('twitch_cb', 'GeneralController@twitchAuthCallback');
+Route::get('test', 'GeneralController@test');
 
-Route::get('/test', function (Request $request) {
-	return "hi";
-});
