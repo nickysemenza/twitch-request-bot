@@ -16,3 +16,7 @@ use Illuminate\Http\Request;
 Route::get('twitch_cb', 'GeneralController@twitchAuthCallback');
 Route::get('test', 'GeneralController@test');
 
+Route::group(array('prefix' => 'users/me'), function() {
+    Route::get('/', 'UsersController@getMe');
+    Route::put('/', 'UsersController@updateMe');
+});
