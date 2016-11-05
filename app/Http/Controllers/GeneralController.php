@@ -30,6 +30,6 @@ class GeneralController extends Controller {
 		header("Location: ".env('FRONTEND_ADDRESS')."/auth?jwt=".$jwt);
 	}
 	public function getSongQueue() {
-	    return SongRequest::where('status','!=',2)->orderBy('priority','DESC')->get();
+	    return SongRequest::where('status','!=',SongRequest::PLAYED)->orderBy('priority','DESC')->get();
     }
 }
