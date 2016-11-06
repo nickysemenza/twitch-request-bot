@@ -18,8 +18,8 @@ class CreateSongRequestsTable extends Migration
             $table->foreign('user_id')->references('id')->on('users');
             $table->string('title')->nullable();
             $table->string('youtube_id');
-            $table->string('notes');
-            $table->string('instrument');
+            $table->string('notes')->nullable();
+            $table->string('instrument')->nullable();
             $table->boolean('priority')->default(false);
             $table->integer('status')->default(0);
             $table->timestamps();
