@@ -32,7 +32,7 @@ class GeneralController extends Controller {
 		header("Location: ".env('FRONTEND_ADDRESS')."/auth?jwt=".$jwt);
 	}
 	public static function getYoutubeTitle($video_id) {
-        $url="https://www.googleapis.com/youtube/v3/videos?id=".$video_id."&part=snippet&key=AIzaSyDPmhqyYOOJxbvb27UMEFrxsLz5t7yZ-KE";
+        $url="https://www.googleapis.com/youtube/v3/videos?id=".$video_id."&part=snippet&key=".env('YOUTUBE_API_KEY');
 
         $client = new Client();
         $response = $client->request('GET', $url);
