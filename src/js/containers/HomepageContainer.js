@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { fetchMe, signInUser } from '../actions/users';
-import { fetchSongQueue } from '../actions/song';
+import { fetchSongQueue, addSong } from '../actions/song';
 import Homepage from '../components/Homepage.js';
 
 function mapStateToProps(state) {
@@ -23,6 +23,9 @@ const mapDispatchToProps = (dispatch, ownProps) => {
     },
     loadSongQueue: () => {
       dispatch(fetchSongQueue());
+    },
+    addSong: () => {
+      dispatch(addSong());
     }
   }
 }

@@ -4,10 +4,18 @@ import SongQueue from './SongQueue';
 import SongQueueVideo from './SongQueueVideo';
 import TwitchLogin from './TwitchLogin';
 import {Grid, Row, Col} from 'react-bootstrap';
+import SongRequestForm from './SongRequestForm';
 export default class Homepage extends Component {
 
+
+  handleSubmit = (values) => {
+    // Do something with the form values
+    this.props.addSong();
+    console.log(values);
+  }
+
   render() {
-    var nowPlaying = this.props.queue.find(function(queue){return queue.status === 1;});
+    var nowPlaying = this.props.queue ? this.props.queue.find(function(queue){return queue.status === 1;}) : null;
     return(
       <div>
 
@@ -19,7 +27,10 @@ export default class Homepage extends Component {
               <button className="button-primary-wide" onClick={this.props.loadDataUser}>Reload User</button>
               <br/>
               <button className="button-primary-wide" onClick={this.props.loadSongQueue}>Reload SongQueue</button>
-              <p>Now playing: {nowPlaying.title}</p>
+
+              <SongRequestForm onSubmit={this.handleSubmit} />
+
+              <p>{nowPlaying ? `Now playing: ${nowPlaying.title}` : ''}</p>
               <SongQueueVideo song={nowPlaying.youtube_id} autoplay={this.props.isAdmin}/>
 
             </Col>
