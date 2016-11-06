@@ -30,7 +30,11 @@ class GeneralController extends Controller {
 		$user = UsersController::getByName($username);
 
         $roles = $user->roles()->get()->pluck('name');
-        $jwt = JWTAuth::fromUser($user,['username'=>$user->username,'roles'=>$roles]);
+        $jwt = JWTAuth::fromUser($user,[
+            'exp' => strtotime('+1 year'),//TODO: refresh tokens
+            'username'=>$user->username,
+            'roles'=>$roles
+        ]);
 
         Log::info("issuing jwt for user ".$user->id.": ".$jwt);
 		header("Location: ".env('FRONTEND_ADDRESS')."/auth?jwt=".$jwt);
