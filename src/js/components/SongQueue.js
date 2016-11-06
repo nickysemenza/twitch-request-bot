@@ -13,6 +13,7 @@ export default class SongQueue extends Component {
           <td>{song.youtube_id}</td>
           <td>{song.priority}</td>
           <td>{song.status}</td>
+          <td>{song.user.username}</td>
         </tr>)
       });
 
@@ -23,6 +24,7 @@ export default class SongQueue extends Component {
         <th>ytid</th>
         <th>priority</th>
         <th>status</th>
+        <th>requested by</th>
       </tr>
       </thead>
       <tbody>
