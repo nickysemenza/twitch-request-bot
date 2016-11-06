@@ -10,6 +10,15 @@ class UsersController extends Controller {
     public function __construct() {
         $this->middleware('jwt.auth', ['except' => []]);
     }
+
+    public static function getByName($username)
+    {
+        $user =  User::firstOrCreate(['username'=>$username]);
+        if(!$user->hasRole('user'))
+            $user->attachRole(Role::where('name','user')->first());
+        return $username;
+    }
+
     public function getMe() {
         return Auth::user();
     }

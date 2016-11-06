@@ -10,8 +10,15 @@ use Log;
 use JWTAuth;
 class GeneralController extends Controller {
     public function __construct() {
-        $this->middleware('jwt.auth', ['except' => ['twitchAuthCallback','test']]);
+        $this->middleware('jwt.auth', ['except' => ['twitchAuthCallback','test','getSongQueue']]);
     }
+
+    private static function getYoutubeVideoID($url)
+    {
+        preg_match("/^(?:http(?:s)?:\/\/)?(?:www\.)?(?:m\.)?(?:youtu\.be\/|youtube\.com\/(?:(?:watch)?\?(?:.*&)?v(?:i)?=|(?:embed|v|vi|user)\/))([^\?&\"'>]+)/", $url, $matches);
+        return $matches[1];//TODO: error checking
+    }
+
     public function test() {
         return "hi";
     }
@@ -20,10 +27,7 @@ class GeneralController extends Controller {
 		$code = $request->all()['code'];
 		$token = TwitchAPIController::getToken($code);
         $username = TwitchAPIController::getUsername($token);
-		$user =  User::firstOrCreate(['username'=>$username]);
-
-        if(!$user->hasRole('user'))
-            $user->attachRole(Role::where('name','user')->first());
+		$user = UsersController::getByName($username);
 
         $roles = $user->roles()->get()->pluck('name');
         $jwt = JWTAuth::fromUser($user,['username'=>$user->username,'roles'=>$roles]);
@@ -33,19 +37,24 @@ class GeneralController extends Controller {
 	}
 	public static function getYoutubeTitle($video_id) {
         $url="https://www.googleapis.com/youtube/v3/videos?id=".$video_id."&part=snippet&key=".env('YOUTUBE_API_KEY');
-
         $client = new Client();
         $response = $client->request('GET', $url);
         //TODO: error handling
         return json_decode($response->getBody(),true)['items'][0]['snippet']['title'];
     }
 	public function getSongQueue() {
-	    return SongRequest::where('status','!=',SongRequest::PLAYED)->orderBy('priority','DESC')->get();
+	    return SongRequest::
+        with(
+            [
+                'user'=>function($query) {
+                    $query->select('id','username');//we ony want to grab id, username, so we don't leak credits
+                }
+            ]
+        )->where('status','!=',SongRequest::PLAYED)->orderBy('priority','DESC')->get();
     }
     public function addSongRequest(Request $request) {
         $url = $request->get('youtube_url');
-        preg_match("/^(?:http(?:s)?:\/\/)?(?:www\.)?(?:m\.)?(?:youtu\.be\/|youtube\.com\/(?:(?:watch)?\?(?:.*&)?v(?:i)?=|(?:embed|v|vi|user)\/))([^\?&\"'>]+)/", $url, $matches);
-        $youtube_id = $matches[1];
+        $youtube_id = self::getYoutubeVideoID($url);
         $sr = new SongRequest();
         $sr->user_id = Auth::user()->id;
         $sr->youtube_id = $youtube_id;
