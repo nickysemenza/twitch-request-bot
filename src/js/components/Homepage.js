@@ -11,7 +11,10 @@ export default class Homepage extends Component {
   handleSubmit = (values) => {
     // Do something with the form values
     this.props.addSong();
-    console.log(values);
+    //grr hacky
+    setTimeout(() => {
+      this.props.loadSongQueue();
+    }, 1000);
   }
 
   render() {
