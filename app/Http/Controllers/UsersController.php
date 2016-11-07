@@ -16,7 +16,7 @@ class UsersController extends Controller {
         $user =  User::firstOrCreate(['username'=>$username]);
         if(!$user->hasRole('user'))
             $user->attachRole(Role::where('name','user')->first());
-        return $username;
+        return $user;
     }
 
     public function getMe() {
