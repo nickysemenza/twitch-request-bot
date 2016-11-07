@@ -32,19 +32,17 @@ function receiveSongQueue(json) {
 
 export const ADD_SONG_REQUEST = 'ADDSONG_REQUEST';
 export const ADD_SONG_REQUEST_SUCCESS = 'ADDSONG_REQUEST_SUCCESS';
-export function addSong() {
+export function addSong(formData) {
   return (dispatch, getState) => {
     const token = getState().user.jwt_token;
-    const fields = getState().form.songrequest.values;
-    dispatch(requestAddSong(fields));
-
+    dispatch(requestAddSong(formData));
     return fetch(`${API_BASE_URL}/song?token=${token}`,{
       method: 'POST',
       headers: {
         'Accept': 'application/json',
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify(fields)
+      body: JSON.stringify(formData)
     })
       .then(response => response.json())
       .then(json => dispatch(requestAddSongSuccess(json)))

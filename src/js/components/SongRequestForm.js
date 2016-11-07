@@ -20,10 +20,25 @@ class SongRequestForm extends Component {
     return (
       <form onSubmit={handleSubmit}>
         <div>
-          <label htmlFor="youtube_url">Youtube URL</label>
-          <Field className="light-textbox" name="youtube_url" component="input" type="text"/>
+          <label style={{color:'black'}} htmlFor="youtube_url">Youtube URL:</label>
+          <Field style={{color:'black'}} name="youtube_url" component="input" type="text"/>
         </div>
-        <button type="submit">Submit</button>
+        <div>
+          <label style={{color:'black'}} htmlFor="use_priority">Make Request Priority?:</label>
+          <Field name="use_priority" component="input" type="checkbox"/>
+        </div>
+        <div>
+          <label style={{color:'black'}} htmlFor="instrumentType">Favorite Color</label>
+          <div>
+            <Field style={{color:'black'}} name="instrumentType" component="select">
+              <option>Select Instrument for +5pts</option>
+              <option value="piano">Piano</option>
+              <option value="guitar">Guitar</option>
+              <option value="sax">Sax</option>
+            </Field>
+          </div>
+        </div>
+        <button className="button-primary-wide" type="submit">Submit</button>
       </form>
     );
   }
