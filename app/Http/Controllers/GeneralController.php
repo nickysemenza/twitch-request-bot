@@ -66,4 +66,29 @@ class GeneralController extends Controller {
         $sr->save();
         return ['ok'];
     }
+    public function selectSongForPlaying(Request $request, $mode, $id) {
+        //todo: admin-only route
+        switch($mode) {
+            case "first":
+                $sr = SongRequest::where('status','=',SongRequest::NOT_PLAYED)->orderBy('priority','DESC')->first();
+                break;
+            case "random":
+                $sr = SongRequest::where('status','=',SongRequest::NOT_PLAYED)->inRandomOrder()->first();
+                break;
+            case "specific":
+                $sr = SongRequest::find($id);
+                break;
+            default:
+                //default to random
+                $sr = SongRequest::where('status','=',SongRequest::NOT_PLAYED)->orderBy('priority','DESC')->first();
+                break;
+
+        }
+        if($sr) {
+            $sr->setNowPlaying();
+            return ['ok'];
+        }
+        //no unplayed songs
+        return ['no'];
+    }
 }

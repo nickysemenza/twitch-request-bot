@@ -17,6 +17,7 @@ Route::get('twitch_cb', 'GeneralController@twitchAuthCallback');
 Route::get('test', 'GeneralController@test');
 Route::get('songqueue', 'GeneralController@getSongQueue');
 Route::post('song', 'GeneralController@addSongRequest');
+Route::post('song/play/{which}/{id}', 'GeneralController@selectSongForPlaying');
 
 Route::group(array('prefix' => 'users/me'), function() {
     Route::get('/', 'UsersController@getMe');

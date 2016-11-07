@@ -12,4 +12,9 @@ class SongRequest extends Model
     const NOT_PLAYED = 0;
     const PLAYING = 1;
     const PLAYED = 2;
+    protected $fillable = ['status'];
+    public function setNowPlaying() {
+        SongRequest::where('status', self::PLAYING)->update(['status' => self::PLAYED]);
+        $this->update(['status' => self::PLAYING]);
+    }
 }
