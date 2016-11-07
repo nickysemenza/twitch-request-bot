@@ -62,3 +62,19 @@ function requestAddSongSuccess(json) {
     receivedAt: Date.now()
   }
 }
+
+
+export function selectNowPlaying(mode, id) {
+  return (dispatch, getState) => {
+    const token = getState().user.jwt_token;
+    return fetch(`${API_BASE_URL}/song/play/${mode}/${id}?token=${token}`,{
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      }
+    })
+      .then(response => response.json())
+      .then(json => dispatch(fetchSongQueue()))
+  }
+}

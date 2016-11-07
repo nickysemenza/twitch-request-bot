@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { fetchMe, signInUser } from '../actions/users';
-import { fetchSongQueue, addSong } from '../actions/song';
+import { fetchSongQueue, addSong, selectNowPlaying } from '../actions/song';
 import Homepage from '../components/Homepage.js';
 
 function mapStateToProps(state) {
@@ -26,6 +26,15 @@ const mapDispatchToProps = (dispatch, ownProps) => {
     },
     addSong: (details) => {
       dispatch(addSong(details));
+    },
+    nowPlayingID: (id) => {
+      dispatch(selectNowPlaying("specific",id));
+    },
+    nowPlayingFirst: () => {
+      dispatch(selectNowPlaying("first",0));
+    },
+    nowPlayingRandom: () => {
+      dispatch(selectNowPlaying("random",0));
     }
   }
 }
