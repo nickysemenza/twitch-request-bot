@@ -57,17 +57,44 @@ class GeneralController extends Controller {
         )->where('status','!=',SongRequest::PLAYED)->orderBy('priority','DESC')->get();
     }
     public function addSongRequest(Request $request) {
+
+        Log::info($request->all());
+        $user = Auth::user();
+        $numCreditsUsed = 0;
+
         $url = $request->get('youtube_url');
         $youtube_id = self::getYoutubeVideoID($url);
         $sr = new SongRequest();
-        $sr->user_id = Auth::user()->id;
+        $sr->user_id = $user->id;
         $sr->youtube_id = $youtube_id;
+
+        if($request->get('use_priority')) {
+            $numCreditsUsed+=5;
+            $sr->priority = true;
+        }
+
+        $instrument = $request->get('instrument');
+        //todo: verify instrument is valid
+        if($instrument!="none") {
+            $numCreditsUsed+=5;
+            $sr->instrument = $instrument;
+        }
+
         $sr->title = self::getYoutubeTitle($youtube_id);
-        $sr->save();
-        return ['ok'];
+
+
+        Log::info("need credits:".$numCreditsUsed." have: ".$user->credits);
+        if($user->credits>=$numCreditsUsed) {
+            $sr->save();
+            return ['ok'];
+        }
+        else {
+            return ['error'=>'not enough credits'];
+        }
     }
     public function selectSongForPlaying(Request $request, $mode, $id) {
-        //todo: admin-only route
+        if(!Auth::user()->hasRole('admin'))//TODO middleware perhaps?
+            return ['not authorized'];
         switch($mode) {
             case "first":
                 $sr = SongRequest::where('status','=',SongRequest::NOT_PLAYED)->orderBy('priority','DESC')->first();
