@@ -24,8 +24,8 @@ const mapDispatchToProps = (dispatch, ownProps) => {
     loadSongQueue: () => {
       dispatch(fetchSongQueue());
     },
-    addSong: () => {
-      dispatch(addSong());
+    addSong: (details) => {
+      dispatch(addSong(details));
     }
   }
 }
