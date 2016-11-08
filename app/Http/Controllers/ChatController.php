@@ -24,8 +24,16 @@ class ChatController extends Controller {
         switch($words[0]) {
             case "!sr":
             case "!songrequest":
-                //TODO: this, also handing re-requesting
-                //self::sendChatMessage("song request yay");
+                //TODO: handing re-requesting
+                $user = UsersController::getByName($sender);
+
+                if(sizeof($words)==1)
+                    self::sendChatMessage("@".$sender.", please use a valid youtube link.");
+                if(sizeof($words)==2) {
+                    $result = $user->requestSong($words[1]);
+                    //TODO: respond back with result / error message
+                }
+                //TODO: vip requests?
                 break;
             case "!p":
             case "!points":
