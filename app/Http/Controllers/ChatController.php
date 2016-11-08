@@ -36,7 +36,17 @@ class ChatController extends Controller {
                     else
                         self::sendChatMessage("@".$sender.", your request failed: ".$result['error']);
                 }
-                //TODO: vip requests?
+                if(sizeof($words)==3) {
+                    $keyword = $words[2];
+                    if($keyword=="vip" || $keyword=="priority") {
+                        $result = $user->requestSong($words[1], true);
+                        if ($result['status'] == 'ok')
+                            self::sendChatMessage("@" . $sender . ", your priority request has been added to the queue!");
+                        else
+                            self::sendChatMessage("@" . $sender . ", your priority request failed: " . $result['error']);
+                    }
+                }
+
                 break;
             case "!p":
             case "!points":
