@@ -32,6 +32,7 @@ class User extends Authenticatable
     public function requestSong($youtube_url, $is_priority = false, $options = null) {
         $user = $this;
         //TODO: validate youtube_url
+        //return ['status'=>'error','error'=>'invalid youtube link'];
 
         $numCreditsUsed = 0;
 

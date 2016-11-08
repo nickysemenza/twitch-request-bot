@@ -31,7 +31,10 @@ class ChatController extends Controller {
                     self::sendChatMessage("@".$sender.", please use a valid youtube link.");
                 if(sizeof($words)==2) {
                     $result = $user->requestSong($words[1]);
-                    //TODO: respond back with result / error message
+                    if($result['status']=='ok')
+                        self::sendChatMessage("@".$sender.", your request has been added to the queue!");
+                    else
+                        self::sendChatMessage("@".$sender.", your request failed: ".$result['error']);
                 }
                 //TODO: vip requests?
                 break;
