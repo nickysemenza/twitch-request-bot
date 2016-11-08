@@ -21,7 +21,15 @@ var client = new irc.Client(settings.server, settings.botName, {
 /* when we receive a message from IRC, forward it off to laravel */
 client.addListener('message', function (from, to, message) {
 	console.log(from, to, message);
-	request.post(settings.api_server_address, {'message':message,'sender':from,'token':settings.internal_token});
+  
+  request({
+    url: settings.api_server_address+"/irc/message",
+    method: 'POST',
+    json: {'message':message,'sender':from,'token':settings.internal_token}
+  }, function(error, response, body){
+    console.log(body);
+  });
+
 });
 
 /* when we receive a message (to send) from laravel, send it off to IRC */
