@@ -8,6 +8,13 @@ import SongRequestForm from './SongRequestForm';
 export default class Homepage extends Component {
 
 
+
+  constructor(props) {
+    super(props);
+    this.state = {shouldAutoPlay: false};
+  }
+
+
   handleSubmit = (values) => {
     // Do something with the form values
     this.props.addSong(values);
@@ -44,7 +51,8 @@ export default class Homepage extends Component {
 
               {/*todo: only show if now playing*/}
               <p>{nowPlaying ? `Now playing: ${nowPlaying.title}` : ''}</p>
-              <SongQueueVideo song={nowPlaying ? nowPlaying.youtube_id : null} autoplay={this.props.isAdmin}/>
+              Autoplay?<input type="checkbox" defaultChecked={this.state.shouldAutoPlay} />
+              <SongQueueVideo song={nowPlaying ? nowPlaying.youtube_id : null} autoplay={this.props.isAdmin && this.state.shouldAutoPlay}/>
 
             </Col>
             <Col sm={6} md={6}>
