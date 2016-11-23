@@ -8,7 +8,7 @@ export default class MainNavBar extends Component {
   render() {
     //APIget("users/me").then(a => console.log("BODY:",a));
     return (
-      <Navbar className="navbar-custom">
+      <Navbar className="navbar-custom navbar-inverse">
         <Navbar.Header>
           <Navbar.Brand>
             <IndexLinkContainer to="/">
@@ -18,6 +18,13 @@ export default class MainNavBar extends Component {
           <Navbar.Toggle />
         </Navbar.Header>
         <Navbar.Collapse>
+          <Nav>
+            {this.props.isAdmin ?
+            <LinkContainer to="admin/users">
+              <NavItem>Users</NavItem>
+            </LinkContainer>
+              : ""}
+          </Nav>
           <Nav pullRight>
             {
               this.props.isAuthenticated

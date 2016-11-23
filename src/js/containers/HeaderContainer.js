@@ -6,9 +6,11 @@ import MainNavBar from '../components/Nav.js';
 
 
 function mapStateToProps(state) {
+  let isAuthenticated = state.user.status=='authenticated';
   return {
-    isAuthenticated: state.user.status=='authenticated' && state.user.me,
+    isAuthenticated: isAuthenticated,
     user: state.user,
+    isAdmin: isAuthenticated && state.user.token_data.roles.includes('admin'),
     username: state.user.me ? state.user.me.username : 'naa'
 
   };

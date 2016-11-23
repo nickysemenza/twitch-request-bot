@@ -3,7 +3,9 @@ import {
 	SIGNIN_USER_SUCCESS,  SIGNIN_USER_FAILURE,
 	LOGOUT_USER,
   REQUEST_ME,
-  RECEIVE_ME
+  RECEIVE_ME,
+  REQUEST_USER_LIST,
+  RECEIVE_USER_LIST,
 } from '../actions/users';
 
 import { decodeJWT } from '../Utils'
@@ -32,6 +34,17 @@ export default function(state = INITIAL_STATE, action) {
         isFetching: false,
         didInvalidate: false,
         me: action.me,
+        lastUpdated: action.receivedAt
+      };
+
+    case REQUEST_USER_LIST:
+      return { ...state,
+        isFetchingUserList: true,
+      };
+    case RECEIVE_USER_LIST:
+      return { ...state,
+        isFetchingUserList: false,
+        user_list: action.users,
         lastUpdated: action.receivedAt
       };
 

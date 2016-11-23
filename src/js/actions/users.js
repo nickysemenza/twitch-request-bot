@@ -13,6 +13,49 @@ export const LOGOUT_USER = 'LOGOUT_USER';
 export const REQUEST_ME = 'REQUEST_ME';
 export const RECEIVE_ME = 'RECEIVE_ME';
 
+export const REQUEST_USER_LIST = 'REQUEST_USER_LIST';
+export const RECEIVE_USER_LIST = 'RECEIVE_USER_LIST';
+
+export function fetchUserList() {
+  return (dispatch, getState) => {
+    dispatch(requestUserList());
+    const token = getState().user.jwt_token;
+
+    return fetch(`${API_BASE_URL}/users?token=${token}`)
+      .then(response => response.json())
+      .then(json => dispatch(receiveUserList(json)))
+  }
+}
+
+function requestUserList() {
+  return {
+    type: REQUEST_USER_LIST,
+  }
+}
+
+function receiveUserList(json) {
+  return {
+    type: RECEIVE_USER_LIST,
+    users: json
+  }
+}
+
+export function giveUserCredits(id, points) {
+  return (dispatch, getState) => {
+    const token = getState().user.jwt_token;
+    return fetch(`${API_BASE_URL}/users/${id}/givecredits/${points}?token=${token}`,{
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      }
+    })
+      .then(response => response.json())
+      .then(json => dispatch(fetchUserList()))
+  }
+}
+
+
 export function fetchMe() {
   return (dispatch, getState) => {
     dispatch(requestMe());
