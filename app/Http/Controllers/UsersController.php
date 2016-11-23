@@ -24,4 +24,20 @@ class UsersController extends Controller {
         $user["has_unplayed_song"] = User::first()->hasUnplayedSong();
         return $user;
     }
+    public function getAll() {
+        if(!Auth::user()->hasRole('admin'))//TODO middleware perhaps?
+            return ['not authorized'];
+        $users = User::all();
+        return $users;
+    }
+    public function giveCredits($id, $credits) {
+        if(!Auth::user()->hasRole('admin'))//TODO middleware perhaps?
+            return ['not authorized'];
+        $user = User::find($id);
+        if(!$user)
+            return ['user not found'];
+        $user->credits+=$credits;
+        $user->save();
+        return ['ok'];
+    }
 }

@@ -24,6 +24,10 @@ Route::post('song/play/{which}/{id}', 'SongController@selectSongForPlaying');
 
 Route::post('irc/message', 'ChatController@incomingChatMessage');
 
+
+Route::get('users', 'UsersController@getAll');
+Route::post('users/{id}/givecredits/{credits}', 'UsersController@giveCredits');
+
 Route::group(array('prefix' => 'users/me'), function() {
     Route::get('/', 'UsersController@getMe');
     Route::put('/', 'UsersController@updateMe');
