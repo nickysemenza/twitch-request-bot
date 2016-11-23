@@ -7,7 +7,7 @@
     "clean:build": "node ./bin/clean.js createdir",
     "build:html": "node ./bin/buildHtml.js",
     "prestart": "node ./bin/clean.js",
-    "start": "webpack-dev-server --config ./config/webpack.config.dev.js --hot --inline --progress",
+    "start": "webpack-dashboard -- webpack-dev-server --config ./config/webpack.config.dev.js --hot --inline --progress",
     "prebuild": "npm run clean:build && npm run build:html",
     "build": "export NODE_ENV=production & NODE_ENV=production & webpack -p --config ./config/webpack.config.prod.js --progress",
     "lint": "eslint config src/js/** --ext .js",
@@ -50,6 +50,7 @@
     "style-loader": "0.13.0",
     "url-loader": "0.5.7",
     "webpack": "1.13.0",
+    "webpack-dashboard": "0.2.0",
     "webpack-dev-server": "1.14.1"
   },
   "dependencies": {

@@ -9,6 +9,8 @@ const PATHS = {
   build: path.resolve(__dirname, '../build')
 };
 
+var DashboardPlugin = require('webpack-dashboard/plugin');
+
 const plugins = [
   // Shared code
   new webpack.optimize.CommonsChunkPlugin('vendor', 'js/vendor.bundle.js'),
@@ -18,7 +20,8 @@ const plugins = [
     'process.env.NODE_ENV': JSON.stringify('development'),
     __DEV__: JSON.stringify(JSON.parse(process.env.DEBUG || 'false'))
   }),
-  new webpack.optimize.OccurenceOrderPlugin()
+  new webpack.optimize.OccurenceOrderPlugin(),
+  new DashboardPlugin()
 ];
 
 const sassLoaders = [
