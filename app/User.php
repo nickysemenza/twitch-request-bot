@@ -28,6 +28,9 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+    public function hasUnplayedSong() {
+        return SongRequest::where('user_id',$this->id)->where('status','!=',SongRequest::PLAYED)->count() > 0;
+    }
 
     public function requestSong($youtube_url, $is_priority = false, $options = null) {
         $user = $this;
@@ -64,6 +67,9 @@ class User extends Authenticatable
         else {
             return ['status'=>'error','error'=>'not enough credits'];
         }
+        //TODO: actually decrement the points
+
+        //TODO: replace unplayed song
 
 
     }

@@ -20,6 +20,8 @@ class UsersController extends Controller {
     }
 
     public function getMe() {
-        return Auth::user();
+        $user = Auth::user();
+        $user["has_unplayed_song"] = User::first()->hasUnplayedSong();
+        return $user;
     }
 }
