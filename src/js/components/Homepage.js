@@ -45,8 +45,12 @@ export default class Homepage extends Component {
               <button className="button-primary-wide" onClick={this.props.loadSongQueue}>[debugreload] queue</button>
 
 
-              <Panel header={<h3>Song requests</h3>}>
-                <SongRequestForm onSubmit={this.handleSubmit} />
+              <Panel header={<h3>Song requests</h3>} style={{color: "black"}}>
+                {this.props.auth ?
+                <div>
+                  <p>{this.props.user.has_unplayed_song ? "Note: you currently have a song in the queue - requesting another song will replace it but maintain position." : ""}</p>
+                  <SongRequestForm onSubmit={this.handleSubmit} creditBalance={this.props.user.credits} />
+                </div> : <div>login to request songs!</div>}
               </Panel>
 
               {/*todo: only show if now playing*/}
