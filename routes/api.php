@@ -15,9 +15,13 @@ use Illuminate\Http\Request;
 
 Route::get('twitch_cb', 'GeneralController@twitchAuthCallback');
 Route::get('test', 'GeneralController@test');
-Route::get('songqueue', 'GeneralController@getSongQueue');
-Route::post('song', 'GeneralController@addSongRequest');
-Route::post('song/play/{which}/{id}', 'GeneralController@selectSongForPlaying');
+
+
+Route::get('songqueue', 'SongController@getSongQueue');
+Route::post('song', 'SongController@addSongRequest');
+Route::post('song/play/{which}/{id}', 'SongController@selectSongForPlaying');
+
+
 Route::post('irc/message', 'ChatController@incomingChatMessage');
 
 Route::group(array('prefix' => 'users/me'), function() {
