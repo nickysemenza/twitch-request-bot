@@ -87,30 +87,13 @@ a:active {
   align-items: center;
 }
 
-
-.songlist
-{
-
-}
-.songListElement
-{
-  background-color: royalblue;
-  margin: 5px;
-  padding: 5px;
-  border-radius: 10px;
-}
-.songListElement-nowPlaying
-{
-  background-color: mediumpurple;
-}
-
 .songListElementStripe
 {
   width: 50px;
   height: 100px;
   border: 1px;
   display: inline-block;
-  background-color: royalblue;
+  background-color: #689BDD;
   vertical-align: middle;
   border-bottom-left-radius: 10px;
   border-top-left-radius: 10px;
@@ -118,7 +101,12 @@ a:active {
   padding-left: 20px;
 }
 .songListElementStripe-nowPlaying {
+  @extend .songListElementStripe;
   background-color: #EF6356;
+}
+.songListElementStripe-priority {
+  @extend .songListElementStripe;
+  background-color: royalblue;
 }
 .songListElementContent {
   width: 400px;

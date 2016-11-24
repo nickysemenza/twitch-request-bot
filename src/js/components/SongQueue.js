@@ -11,20 +11,16 @@ export default class SongQueue extends Component {
     var list;
     if(this.props.queue)
       list = this.props.queue.map(function(song){
-        // return (
-        //  <div key={song.id} className={song.status==1 ? 'songListElement songListElement-nowPlaying' : 'songListElement'}>
-        //   <a href={"https://www.youtube.com/watch?v="+song.youtube_id} target="_blank">{song.title}</a>
-        //   <p>requested by {song.user.username} {song.priority ? <FontAwesome name='star' /> : ''}</p>
-        //   {song.status==0 ? <button className="button-primary" onClick={() => this.props.play(song.id)}>play now</button> : ''}
-        //   <p>(id={song.id})</p>
-        // </div>
-        // );
+        let stripeClass = "songListElementStripe";
+        if(song.priority) stripeClass = "songListElementStripe-priority";
+        if(song.status==1) stripeClass = "songListElementStripe-nowPlaying";
         return (
           <div key={song.id} className="songListElementWrapper">
-            <div className={song.status==1 ? 'songListElementStripe songListElementStripe-nowPlaying' : 'songListElementStripe'}>{song.priority ? <FontAwesome name='star' /> : ''}</div>
+            <div className={stripeClass}>{song.priority ? <FontAwesome name='star' /> : ''}</div>
             <div className="songListElementContent">
-              {song.id} | <a href={"https://www.youtube.com/watch?v="+song.youtube_id} target="_blank">{this.truncString(song.title,50)}</a>
-              <p>requested by {song.user.username} </p>
+              <div><FontAwesome name='youtube-play' /> <a href={"https://www.youtube.com/watch?v="+song.youtube_id} target="_blank">{this.truncString(song.title,50)}</a></div>
+              <div><FontAwesome name='music' /> {song.instrument != "" ? (`played on ${song.instrument}`) : "piano"}</div>
+              <div><FontAwesome name='user' /> {song.user.username}</div>
               {(song.status==0 && this.props.isAdmin) ? <button className="button-primary" onClick={() => this.props.play(song.id)}>play now</button> : ''}
             </div>
           </div>

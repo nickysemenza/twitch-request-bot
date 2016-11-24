@@ -11,9 +11,7 @@ export default class MainNavBar extends Component {
       <Navbar className="navbar-custom navbar-inverse">
         <Navbar.Header>
           <Navbar.Brand>
-            <IndexLinkContainer to="/">
-              <a>home</a>
-            </IndexLinkContainer>
+              <a href="/">home</a>
           </Navbar.Brand>
           <Navbar.Toggle />
         </Navbar.Header>

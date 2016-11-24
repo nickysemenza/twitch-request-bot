@@ -45,11 +45,7 @@ let SongRequestForm = (props) => {
             <Field name="instrument" component="input" type="text" placeholder="pick any instrument"/>
           </div>
         </div>
-        <pre>
-          {error}
-          </pre>
         <p>You have {props.creditBalance} request credits. {(pointsTotal > props.creditBalance) ? "Looks like you need more!" : ""}</p>
-
           <button type="submit" disabled={pristine || submitting || !valid || (pointsTotal > props.creditBalance)}>Submit for {pointsTotal} points</button>
         <button type="button" disabled={pristine || submitting} onClick={reset}>Clear Values</button>
       </form>
