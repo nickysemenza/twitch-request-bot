@@ -42,12 +42,7 @@ let SongRequestForm = (props) => {
         <div>
           <label htmlFor="instrument">Select Instrument (+5pts)</label>
           <div>
-            <Field name="instrument" component="select">
-              <option value="none">None</option>
-              <option value="piano">Piano</option>
-              <option value="guitar">Guitar</option>
-              <option value="sax">Sax</option>
-            </Field>
+            <Field name="instrument" component="input" type="text" placeholder="pick any instrument"/>
           </div>
         </div>
         <pre>
@@ -75,7 +70,7 @@ SongRequestForm = connect(
     if(selector(state, 'use_priority'))
       pointsTotal += 5;
     let instrument = selector(state, 'instrument');
-    if(instrument != "none" && instrument !== undefined)
+    if(instrument != "" && instrument !== undefined)
       pointsTotal += 5;
     return {
       pointsTotal
