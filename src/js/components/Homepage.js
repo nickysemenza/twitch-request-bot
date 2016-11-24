@@ -64,7 +64,7 @@ export default class Homepage extends Component {
               <br/>
               <button className="button-primary-wide" onClick={this.props.nowPlayingRandom}>play random</button>
               <h2>Song Request Queue</h2>
-              <SongQueue queue={this.props.queue} play={this.props.nowPlayingID}/>
+              <SongQueue queue={this.props.queue} play={this.props.nowPlayingID} isAdmin={this.props.isAdmin}/>
             </Col>
           </Row>
         </Grid>

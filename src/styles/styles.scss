@@ -1,5 +1,5 @@
 body {
-  background: #2C2E31;
+  background: #1F2325;
   color: white;
   //padding-top: 30px;
   font-family: 'Roboto', sans-serif;
@@ -48,7 +48,7 @@ a:active {
   text-transform:uppercase;
 }
 .button-primary:hover {
-  background: transparent;
+  background: rgba(247, 74, 89, 0.65);
 }
 .button-primary:active {
   background: rgba(247, 85, 103, 0.47);
@@ -95,9 +95,43 @@ a:active {
 .songListElement
 {
   background-color: royalblue;
-  margin-bottom: 5px;
+  margin: 5px;
+  padding: 5px;
+  border-radius: 10px;
 }
 .songListElement-nowPlaying
 {
   background-color: mediumpurple;
+}
+
+.songListElementStripe
+{
+  width: 50px;
+  height: 100px;
+  border: 1px;
+  display: inline-block;
+  background-color: royalblue;
+  vertical-align: middle;
+  border-bottom-left-radius: 10px;
+  border-top-left-radius: 10px;
+  padding-top: 10px;
+  padding-left: 20px;
+}
+.songListElementStripe-nowPlaying {
+  background-color: #EF6356;
+}
+.songListElementContent {
+  width: 400px;
+  height: 100px;
+  border: 1px;
+  vertical-align: middle;
+  padding: 5px;
+
+  display: inline-block;
+  background-color: #444c60;
+  border-bottom-right-radius: 10px;
+  border-top-right-radius: 10px;
+}
+.songListElementWrapper {
+  margin: 5px;
 }
