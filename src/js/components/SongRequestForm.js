@@ -2,11 +2,16 @@ import React, { Component } from 'react';
 import { Field, reduxForm, formValueSelector } from 'redux-form';
 import { connect } from 'react-redux'
 
+function ytVidId(url) {
+  var p = /^(?:https?:\/\/)?(?:www\.)?(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=))((\w|-){11})(?:\S+)?$/;
+  return (url.match(p)) ? RegExp.$1 : false;
+}
+
 const validate = values => {
   const errors = {}
   if (!values.youtube_url) {
     errors.youtube_url = 'Required'
-  } else if (!/^http:\/\/(?:www\.)?youtube.com\/watch\?(?=.*v=\w+)(?:\S+)?$/i.test(values.youtube_url)) {
+  } else if (!ytVidId(values.youtube_url)) {
     errors.youtube_url = 'Invalid youtube link'
     //TODO: make this support https youtbez
   }
