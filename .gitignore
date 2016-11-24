@@ -5,3 +5,5 @@
 Homestead.json
 Homestead.yaml
 .env
+/coverage
+coverage.xml
