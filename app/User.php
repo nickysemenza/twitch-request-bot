@@ -47,6 +47,15 @@ class User extends Authenticatable
         Log::info("used {$amt} credits for user {$this->id}");
         return true;
     }
+    public function giveCredits($amt,$info = null) {
+        $t = new CreditTransaction();
+        $t->user_id = $this->id;
+        $t->credit_gained = $amt;
+        $t->info = json_encode($info);
+        $t->save();
+        $this->credits += $amt;
+        $this->save();
+    }
 
     public function requestSong($youtube_url, $is_priority = false, $options = null) {
         //TODO: validate youtube_url

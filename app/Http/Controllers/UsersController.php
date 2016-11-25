@@ -36,8 +36,7 @@ class UsersController extends Controller {
         $user = User::find($id);
         if(!$user)
             return ['user not found'];
-        $user->credits+=$credits;
-        $user->save();
+        $user->giveCredits($credits,['admin-give'=>Auth::user()->id]);
         return ['ok'];
     }
 }
