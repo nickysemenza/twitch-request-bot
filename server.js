@@ -18,6 +18,10 @@ var client = new irc.Client(settings.server, settings.botName, {
   username: settings.botName,
 });
 
+client.addListener('error', function(message) {
+    console.log('error: ', message);
+});
+
 /* when we receive a message from IRC, forward it off to laravel */
 client.addListener('message', function (from, to, message) {
 	console.log(from, to, message);
