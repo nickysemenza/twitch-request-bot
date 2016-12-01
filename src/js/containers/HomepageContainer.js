@@ -9,7 +9,7 @@ function mapStateToProps(state) {
     user: state.user ? state.user.me : null,
     auth: (state.user.status=='authenticated' && state.user.me!=null),
     queue: state.song.queue,
-    isAdmin: state.user.token_data ? state.user.token_data.roles.includes('admin'): false
+    isAdmin: state.user.token_data ? state.user.token_data.roles.includes('admin') : false
   };
 }
 

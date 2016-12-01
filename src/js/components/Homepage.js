@@ -32,6 +32,14 @@ export default class Homepage extends Component {
 
   render() {
     var nowPlaying = this.props.queue ? this.props.queue.find(function(queue){return queue.status === 1;}) : null;
+
+    let queueControls = (
+      <div>
+        <button className="button-primary-wide" onClick={this.props.nowPlayingFirst}>play first</button>
+        <br/>
+        <button className="button-primary-wide" onClick={this.props.nowPlayingRandom}>play random</button>
+      </div>
+    );
     return(
       <div>
 
@@ -60,9 +68,7 @@ export default class Homepage extends Component {
 
             </Col>
             <Col sm={6} md={6}>
-              <button className="button-primary-wide" onClick={this.props.nowPlayingFirst}>play first</button>
-              <br/>
-              <button className="button-primary-wide" onClick={this.props.nowPlayingRandom}>play random</button>
+              {this.props.isAdmin ? queueControls : ""}
               <h2>Song Request Queue</h2>
               <SongQueue queue={this.props.queue} play={this.props.nowPlayingID} isAdmin={this.props.isAdmin}/>
             </Col>
