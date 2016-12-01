@@ -17,6 +17,8 @@ class ChatController extends Controller {
     }
 
     public static function processChatMessage($sender, $message) {
+        $user = UsersController::getByName($sender);
+        $atSender = "@".$sender;
         $words = explode(" ", $message);
         Log::info($words);
         if(sizeof($words)==0)
@@ -24,39 +26,58 @@ class ChatController extends Controller {
         switch($words[0]) {
             case "!sr":
             case "!songrequest":
-                //TODO: handing re-requesting
-                $user = UsersController::getByName($sender);
 
-                if(sizeof($words)==1)
-                    self::sendChatMessage("@".$sender.", please use a valid youtube link.");
-                if(sizeof($words)==2) {
+                if($user->hasUnplayedSong()) {
+                    self::sendChatMessage($atSender . " you have an unplayed request, please use !editrequest to change your request");
+                    break;
+                }
+
+                if(sizeof($words)==1)//no parameters
+                    self::sendChatMessage($atSender." please provide a youtube link.");
+                if(sizeof($words)==2) {//provided just 1 param
                     $result = $user->requestSong($words[1]);
                     if($result['status']=='ok')
-                        self::sendChatMessage("@".$sender.", your request has been added to the queue!");
+                        self::sendChatMessage($atSender." your request has been added to the queue!");
                     else
-                        self::sendChatMessage("@".$sender.", your request failed: ".$result['error']);
+                        self::sendChatMessage($atSender." your request failed: ".$result['error']);
                 }
-                if(sizeof($words)==3) {
+                if(sizeof($words)==3) {//provided 2 params
                     $keyword = $words[2];
                     if($keyword=="vip" || $keyword=="priority") {
                         $result = $user->requestSong($words[1], true);
                         if ($result['status'] == 'ok')
-                            self::sendChatMessage("@" . $sender . ", your priority request has been added to the queue!");
+                            self::sendChatMessage($atSender . " your priority request has been added to the queue!");
                         else
-                            self::sendChatMessage("@" . $sender . ", your priority request failed: " . $result['error']);
+                            self::sendChatMessage($atSender . " your priority request failed: " . $result['error']);
+                        break;
                     }
+                    self::sendChatMessage($atSender . " please use proper syntax, or visit: ".env("FRONTEND_ADDRESS")." to make a request");
                 }
 
                 break;
             case "!p":
             case "!points":
-                $user = UsersController::getByName($sender);
-                self::sendChatMessage("@".$sender." you have ".$user->credits." points");
+                self::sendChatMessage($atSender." you have ".$user->credits." points");
                 break;
             case "!sq":
             case "!songqueue":
-                self::sendChatMessage("@".$sender.", please visit ".env("FRONTEND_ADDRESS")." to view the queue");
+                self::sendChatMessage($atSender." please visit ".env("FRONTEND_ADDRESS")." to view the queue");
                 break;
+            case "!editsong":
+                if(!$user->hasUnplayedSong()) {
+                    self::sendChatMessage($atSender . " you don't have any unplayed requests!");
+                    break;
+                }
+                if(sizeof($words)==1)//no parameters
+                    self::sendChatMessage($atSender.", please provide a youtube link.");
+                if(sizeof($words)==2) {//provided just 1 param
+                    $result = $user->requestSong($words[1]);
+                    if ($result['status'] == 'ok')
+                        self::sendChatMessage($atSender . " your request has been updated in the queue!");
+                    else
+                        self::sendChatMessage($atSender . " your request failed: " . $result['error']);
+                }
+
         }
 
     }

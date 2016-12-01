@@ -57,7 +57,6 @@ class GeneralController extends Controller {
         ];
     }
     public function requestsToggle($mode) {
-        Log::info($mode);
         if(!Auth::user()->hasRole('admin'))//TODO middleware perhaps?
             return ['not authorized'];
         $setting = SystemSetting::where('key',SystemSetting::REQUESTS_ENABLED)->first();
