@@ -55,7 +55,7 @@ export default class Homepage extends Component {
 
               {/*todo: only show if now playing*/}
               <p>{nowPlaying ? `Now playing: ${nowPlaying.title}` : ''}</p>
-              Autoplay?<input type="checkbox" defaultChecked={this.state.shouldAutoPlay} />
+              {/*Autoplay?<input type="checkbox" defaultChecked={this.state.shouldAutoPlay} />*/}
               <SongQueueVideo song={nowPlaying ? nowPlaying.youtube_id : null} autoplay={this.props.isAdmin && this.state.shouldAutoPlay}/>
 
             </Col>
