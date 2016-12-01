@@ -2,6 +2,7 @@
 use App\Http\Controllers\Controller;
 use App\Role;
 use App\SongRequest;
+use App\SystemSetting;
 use Illuminate\Http\Request;
 use GuzzleHttp\Client;
 use Auth;
@@ -56,5 +57,8 @@ class SongController extends Controller {
         }
         //no unplayed songs
         return ['no'];
+    }
+    public static function requestsEnabled() {
+        return SystemSetting::where('key',SystemSetting::REQUESTS_ENABLED)->first()->value;
     }
 }

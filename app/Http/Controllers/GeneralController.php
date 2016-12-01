@@ -2,6 +2,7 @@
 use App\Http\Controllers\Controller;
 use App\Role;
 use App\SongRequest;
+use App\SystemSetting;
 use Illuminate\Http\Request;
 use GuzzleHttp\Client;
 use Auth;
@@ -10,7 +11,7 @@ use Log;
 use JWTAuth;
 class GeneralController extends Controller {
     public function __construct() {
-        $this->middleware('jwt.auth', ['except' => ['twitchAuthCallback','test']]);
+        $this->middleware('jwt.auth', ['except' => ['twitchAuthCallback','test','getSystemSettings']]);
     }
 
     public static function getYoutubeVideoID($url)
@@ -46,5 +47,13 @@ class GeneralController extends Controller {
         $response = $client->request('GET', $url);
         //TODO: error handling
         return json_decode($response->getBody(),true)['items'][0]['snippet']['title'];
+    }
+    public function getSystemSettings() {
+        return
+        [
+            'settings'=>[
+                SystemSetting::REQUESTS_ENABLED => SongController::requestsEnabled()
+            ]
+        ];
     }
 }

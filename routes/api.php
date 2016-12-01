@@ -16,6 +16,9 @@ use Illuminate\Http\Request;
 Route::get('twitch_cb', 'GeneralController@twitchAuthCallback');
 Route::get('test', 'GeneralController@test');
 
+Route::get('system', 'GeneralController@getSystemSettings');
+
+
 
 Route::get('songqueue', 'SongController@getSongQueue');
 Route::post('song', 'SongController@addSongRequest');
