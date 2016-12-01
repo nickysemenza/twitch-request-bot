@@ -17,7 +17,7 @@ Route::get('twitch_cb', 'GeneralController@twitchAuthCallback');
 Route::get('test', 'GeneralController@test');
 
 Route::get('system', 'GeneralController@getSystemSettings');
-
+Route::post('system/requestsToggle/{mode}','GeneralController@requestsToggle');
 
 
 Route::get('songqueue', 'SongController@getSongQueue');
