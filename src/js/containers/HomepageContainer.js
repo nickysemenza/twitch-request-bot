@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { fetchMe, signInUser } from '../actions/users';
 import { fetchSongQueue, addSong, selectNowPlaying } from '../actions/song';
+import { toggleSongRequests, fetchSystemSettings } from '../actions/system';
 import Homepage from '../components/Homepage.js';
 
 function mapStateToProps(state) {
@@ -9,7 +10,8 @@ function mapStateToProps(state) {
     user: state.user ? state.user.me : null,
     auth: (state.user.status=='authenticated' && state.user.me!=null),
     queue: state.song.queue,
-    isAdmin: state.user.token_data ? state.user.token_data.roles.includes('admin') : false
+    isAdmin: state.user.token_data ? state.user.token_data.roles.includes('admin') : false,
+    requests_enabled: state.system.system ? state.system.system.settings.requests_enabled : false
   };
 }
 
@@ -35,6 +37,15 @@ const mapDispatchToProps = (dispatch, ownProps) => {
     },
     nowPlayingRandom: () => {
       dispatch(selectNowPlaying("random",0));
+    },
+    enableSongRequests: () => {
+      dispatch(toggleSongRequests(true));
+    },
+    disableSongRequests: () => {
+      dispatch(toggleSongRequests(false));
+    },
+    loadSystem: () => {
+      dispatch(fetchSystemSettings());
     }
   }
 }

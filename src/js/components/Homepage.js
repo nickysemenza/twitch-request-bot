@@ -24,10 +24,15 @@ export default class Homepage extends Component {
     }, 1000);
   };
 
+  loadData = () => {
+    this.props.loadSongQueue();
+    this.props.loadDataUser();
+    this.props.loadSystem();
+  };
   componentDidMount = () => {
+    this.loadData();
     setInterval(() => {
-      this.props.loadSongQueue();
-      this.props.loadDataUser();
+      this.loadData();
     }, 1400);
   };
 
@@ -39,8 +44,30 @@ export default class Homepage extends Component {
         <button className="button-primary-wide" onClick={this.props.nowPlayingFirst}>play first</button>
         <br/>
         <button className="button-primary-wide" onClick={this.props.nowPlayingRandom}>play random</button>
+        <hr/>
+        <br/>
+        <button className="button-primary-wide" onClick={this.props.enableSongRequests}>enable requests</button>
+        <br/>
+        <button className="button-primary-wide" onClick={this.props.disableSongRequests}>disable requests</button>
       </div>
     );
+
+    let isLoggedIn = this.props.auth;
+    let requestsEnabled = this.props.requests_enabled;
+
+    let shouldShowSongForm = isLoggedIn && requestsEnabled;
+    let songFormHideReason;
+    if(!requestsEnabled)
+      songFormHideReason = "song requests are not enabled right now!";
+    if(!isLoggedIn)
+      songFormHideReason = "login to request songs!";
+    let songForm = (shouldShowSongForm ?
+      <div>
+        <p>{this.props.user.has_unplayed_song ? "Note: you currently have a song in the queue - requesting another song will replace it but maintain position." : ""}</p>
+        <SongRequestForm onSubmit={this.handleSubmit} creditBalance={this.props.user.credits} />
+      </div> : <div>{songFormHideReason}</div>
+    );
+
     return(
       <div>
 
@@ -48,18 +75,13 @@ export default class Homepage extends Component {
           <Row className="show-grid">
             <Col sm={6} md={6}>
               {this.props.auth ? `You have ${this.props.user.credits} request credits` : <TwitchLogin action={this.props.signin}/>}
-              <br/>
-              <button className="button-primary-wide" onClick={this.props.loadDataUser}>[debugreload] user</button>
-              <br/>
-              <button className="button-primary-wide" onClick={this.props.loadSongQueue}>[debugreload] queue</button>
-
+              {/*<br/>*/}
+              {/*<button className="button-primary-wide" onClick={this.props.loadDataUser}>[debugreload] user</button>*/}
+              {/*<br/>*/}
+              {/*<button className="button-primary-wide" onClick={this.props.loadSongQueue}>[debugreload] queue</button>*/}
 
               <Panel header={<h3>Song requests</h3>} style={{color: "black"}}>
-                {this.props.auth ?
-                <div>
-                  <p>{this.props.user.has_unplayed_song ? "Note: you currently have a song in the queue - requesting another song will replace it but maintain position." : ""}</p>
-                  <SongRequestForm onSubmit={this.handleSubmit} creditBalance={this.props.user.credits} />
-                </div> : <div>login to request songs!</div>}
+                {songForm}
               </Panel>
 
               {/*todo: only show if now playing*/}
