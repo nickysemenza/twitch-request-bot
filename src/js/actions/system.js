@@ -22,7 +22,6 @@ function requestSystemSettings() {
 }
 
 function receiveSystemSettings(json) {
-  console.log("aaa");
   return {
     type: RECEIVE_SYSTEM_SETTINGS,
     data: json,
@@ -31,7 +30,6 @@ function receiveSystemSettings(json) {
 }
 
 export function toggleSongRequests(isEnabled) {
-  console.log("hi");
   return (dispatch, getState) => {
     const token = getState().user.jwt_token;
     return fetch(`${API_BASE_URL}/system/requestsToggle/${isEnabled}?token=${token}`,{
