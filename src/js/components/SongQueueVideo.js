@@ -11,9 +11,10 @@ export default class SongQueueVideo extends Component {
         autoplay: false
       }
     };
-    return(<YouTube
+    let player = <YouTube
       videoId={videoid}
       opts={opts}
-    />);
+    />
+    return(videoid ? player : null);
   }
 }

@@ -9,19 +9,34 @@ export default class SongQueue extends Component {
   };
   render() {
     var list;
+
     if(this.props.queue)
       list = this.props.queue.map(function(song){
         let stripeClass = "songListElementStripe";
         if(song.priority) stripeClass = "songListElementStripe-priority";
         if(song.status==1) stripeClass = "songListElementStripe-nowPlaying";
+        let isCustomInstrument = (song.instrument != "" && song.instrument != null);
+        let customInstrument = isCustomInstrument ? <div><FontAwesome name='music' /> played on ${song.instrument}</div> : null;
+        let youtubeLink = <a href={"https://www.youtube.com/watch?v="+song.youtube_id} target="_blank">{this.truncString(song.title,50)}</a>;
+        let adminButton = (song.status == 0 && this.props.isAdmin) ? <button className="button-primary" onClick={() => this.props.play(song.id)}>play now</button> : null;
         return (
           <div key={song.id} className="songListElementWrapper">
-            <div className={stripeClass}>{song.priority ? <FontAwesome name='star' /> : ''}</div>
+            <div className={stripeClass}>
+              {song.priority ? <FontAwesome name='star' /> : ''}
+            </div>
             <div className="songListElementContent">
-              <div><FontAwesome name='youtube-play' /> <a href={"https://www.youtube.com/watch?v="+song.youtube_id} target="_blank">{this.truncString(song.title,50)}</a></div>
-              <div><FontAwesome name='music' /> {song.instrument != "" ? (`played on ${song.instrument}`) : "piano"}</div>
-              <div><FontAwesome name='user' /> {song.user.username}</div>
-              {(song.status==0 && this.props.isAdmin) ? <button className="button-primary" onClick={() => this.props.play(song.id)}>play now</button> : ''}
+              <div>
+                <FontAwesome name='youtube-play' />
+                {youtubeLink}
+              </div>
+              <div>
+                {customInstrument}
+              </div>
+              <div>
+                <FontAwesome name='user' />
+                {song.user.username}
+              </div>
+              {adminButton}
             </div>
           </div>
         );

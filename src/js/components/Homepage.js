@@ -24,11 +24,12 @@ export default class Homepage extends Component {
     }, 1000);
   };
 
-  // componentDidMount = () => {
-  //   setInterval(() => {
-  //     this.props.loadSongQueue();
-  //   }, 900);
-  // };
+  componentDidMount = () => {
+    setInterval(() => {
+      this.props.loadSongQueue();
+      this.props.loadDataUser();
+    }, 1400);
+  };
 
   render() {
     var nowPlaying = this.props.queue ? this.props.queue.find(function(queue){return queue.status === 1;}) : null;
