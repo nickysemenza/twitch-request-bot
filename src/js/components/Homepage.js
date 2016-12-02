@@ -22,7 +22,7 @@ export default class Homepage extends Component {
     setTimeout(() => {
       this.props.loadSongQueue();
       this.props.resetRequestForm();
-    }, 1000);
+    }, 400);
   };
 
   loadData = () => {
