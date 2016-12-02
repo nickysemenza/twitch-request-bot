@@ -4,6 +4,7 @@ import { fetchMe, signInUser } from '../actions/users';
 import { fetchSongQueue, addSong, selectNowPlaying } from '../actions/song';
 import { toggleSongRequests, fetchSystemSettings } from '../actions/system';
 import Homepage from '../components/Homepage.js';
+import {reset} from 'redux-form';
 
 function mapStateToProps(state) {
   return {
@@ -46,8 +47,10 @@ const mapDispatchToProps = (dispatch, ownProps) => {
     },
     loadSystem: () => {
       dispatch(fetchSystemSettings());
+    },
+    resetRequestForm: () => {
+      dispatch(reset('songrequest'));
     }
   }
 }
-
 export default connect(mapStateToProps, mapDispatchToProps)(Homepage);

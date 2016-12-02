@@ -21,6 +21,7 @@ export default class Homepage extends Component {
     //grr hacky
     setTimeout(() => {
       this.props.loadSongQueue();
+      this.props.resetRequestForm();
     }, 1000);
   };
 
