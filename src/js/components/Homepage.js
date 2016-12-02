@@ -71,11 +71,11 @@ export default class Homepage extends Component {
 
     return(
       <div>
-
         <Grid>
           <Row className="show-grid">
             <Col sm={6} md={6}>
-              {this.props.auth ? `You have ${this.props.user.credits} request credits` : <TwitchLogin action={this.props.signin}/>}
+              {/*{this.props.auth ? `You have ${this.props.user.credits} request credits` : <TwitchLogin action={this.props.signin}/>}*/}
+              {this.props.auth ? "" : <TwitchLogin action={this.props.signin}/>}
               {/*<br/>*/}
               {/*<button className="button-primary-wide" onClick={this.props.loadDataUser}>[debugreload] user</button>*/}
               {/*<br/>*/}
@@ -95,6 +95,15 @@ export default class Homepage extends Component {
               {this.props.isAdmin ? queueControls : ""}
               <h2>Song Request Queue</h2>
               <SongQueue queue={this.props.queue} play={this.props.nowPlayingID} isAdmin={this.props.isAdmin}/>
+            </Col>
+          </Row>
+          <Row className="show-grid">
+            <Col sm={9} md={9}>
+              <iframe src="https://player.twitch.tv/?channel=cheeseburger97" frameBorder="0" scrolling="no" height="378" width="620"></iframe>
+              {/*<a href="https://www.twitch.tv/cheeseburger97?tt_medium=live_embed&tt_content=text_link" style={"padding":"2px 0px 4px","display":"block","width":"345px","fontWeight":"normal","fontSize":"10px","textDecoration":"underline"}>Watch live video from Cheeseburger97 on www.twitch.tv</a>*/}
+            </Col>
+            <Col sm={3} md={3}>
+              <iframe src="https://www.twitch.tv/cheeseburger97/chat?popout=" frameBorder="0" scrolling="no" height="500" width="350"></iframe>
             </Col>
           </Row>
         </Grid>
