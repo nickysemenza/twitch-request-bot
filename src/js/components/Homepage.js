@@ -11,7 +11,11 @@ export default class Homepage extends Component {
 
   constructor(props) {
     super(props);
-    this.state = {shouldAutoPlay: false};
+    this.state = {
+      shouldAutoPlay: false,
+      showStreamEmbed: false,
+      showChatEmbed: false,
+    };
   }
 
 
@@ -37,8 +41,29 @@ export default class Homepage extends Component {
     }, 1400);
   };
 
+  disableStreamEmbed = () => {
+    this.state.showStreamEmbed = false;
+  };
+  enableStreamEmbed = () => {
+    this.state.showStreamEmbed = true;
+  };
+  disableChatEmbed = () => {
+    this.state.showChatEmbed = false;
+  };
+  enableChatEmbed = () => {
+    this.state.showChatEmbed = true;
+  };
+
   render() {
     var nowPlaying = this.props.queue ? this.props.queue.find(function(queue){return queue.status === 1;}) : null;
+
+    let disableStreamEmbedButton =  <button className="button-primary-wide" onClick={this.disableStreamEmbed}>hide stream</button>;
+    let enableStreamEmbedButton =   <button className="button-primary-wide" onClick={this.enableStreamEmbed}>show stream</button>;
+    let disableChatEmbedButton =    <button className="button-primary-wide" onClick={this.disableChatEmbed}>hide chat</button>;
+    let enableChatEmbedButton =     <button className="button-primary-wide" onClick={this.enableChatEmbed}>show chat</button>;
+
+    let streamEmbed = <iframe className="col-lg-12 col-md-12 col-sm-12" src="https://player.twitch.tv/?channel=cheeseburger97" frameBorder="0" scrolling="no" height="378" width="100%"></iframe>;
+    let chatEmbed = <iframe className="col-lg-12 col-md-12 col-sm-12" src="https://www.twitch.tv/cheeseburger97/chat?popout=" frameBorder="0" scrolling="no" height="500" width="100%"></iframe>;
 
     let queueControls = (
       <div>
@@ -97,13 +122,15 @@ export default class Homepage extends Component {
               <SongQueue queue={this.props.queue} play={this.props.nowPlayingID} isAdmin={this.props.isAdmin}/>
             </Col>
           </Row>
+          <hr/>
           <Row className="show-grid">
-            <Col sm={9} md={9}>
-              <iframe src="https://player.twitch.tv/?channel=cheeseburger97" frameBorder="0" scrolling="no" height="378" width="620"></iframe>
-              {/*<a href="https://www.twitch.tv/cheeseburger97?tt_medium=live_embed&tt_content=text_link" style={"padding":"2px 0px 4px","display":"block","width":"345px","fontWeight":"normal","fontSize":"10px","textDecoration":"underline"}>Watch live video from Cheeseburger97 on www.twitch.tv</a>*/}
+            <Col sm={6} md={6}>
+              {this.state.showStreamEmbed ? disableStreamEmbedButton : enableStreamEmbedButton}
+              {this.state.showStreamEmbed ? streamEmbed : ""}
             </Col>
-            <Col sm={3} md={3}>
-              <iframe src="https://www.twitch.tv/cheeseburger97/chat?popout=" frameBorder="0" scrolling="no" height="500" width="350"></iframe>
+            <Col sm={6} md={6}>
+              {this.state.showChatEmbed ? disableChatEmbedButton : enableChatEmbedButton}
+              {this.state.showChatEmbed ? chatEmbed : ""}
             </Col>
           </Row>
         </Grid>
