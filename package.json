@@ -54,7 +54,7 @@
     "webpack-dev-server": "1.16.2"
   },
   "dependencies": {
-    "autoprefixer": "6.5.3",
+    "autoprefixer": "6.5.4",
     "axios": "0.15.3",
     "bootstrap": "3.3.7",
     "classnames": "2.2.5",
