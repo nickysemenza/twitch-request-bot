@@ -46,7 +46,7 @@
     "redux-immutable-state-invariant": "1.2.4",
     "redux-slider-monitor": "1.0.7",
     "rimraf": "2.5.4",
-    "sass-loader": "4.0.2",
+    "sass-loader": "4.1.0",
     "style-loader": "0.13.1",
     "url-loader": "0.5.7",
     "webpack": "1.14.0",
