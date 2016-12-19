@@ -18,7 +18,8 @@ export default class SongQueue extends Component {
         let isCustomInstrument = (song.instrument != "" && song.instrument != null);
         let customInstrument = isCustomInstrument ? <div><FontAwesome name='music' /> played on ${song.instrument}</div> : null;
         let youtubeLink = <a href={"https://www.youtube.com/watch?v="+song.youtube_id} target="_blank">{this.truncString(song.title,50)}</a>;
-        let adminButton = (song.status == 0 && this.props.isAdmin) ? <button className="button-primary" onClick={() => this.props.play(song.id)}>play now</button> : null;
+        let adminButtonPlay = (song.status == 0 && this.props.isAdmin) ? <button className="button-primary" onClick={() => this.props.play(song.id)}>play now</button> : null;
+        let adminButtonDelete = (song.status == 0 && this.props.isAdmin) ? <button className="button-primary" onClick={() => this.props.delete(song.id)}>delete</button> : null;
         return (
           <div key={song.id} className="songListElementWrapper">
             <div className={stripeClass}>
@@ -36,7 +37,8 @@ export default class SongQueue extends Component {
                 <FontAwesome name='user' />
                 {song.user.username}
               </div>
-              {adminButton}
+              {adminButtonPlay}
+              {adminButtonDelete}
             </div>
           </div>
         );

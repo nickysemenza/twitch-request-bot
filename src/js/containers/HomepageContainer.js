@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { fetchMe, signInUser } from '../actions/users';
-import { fetchSongQueue, addSong, selectNowPlaying } from '../actions/song';
+import { fetchSongQueue, addSong, selectNowPlaying, deleteFromQueue } from '../actions/song';
 import { toggleSongRequests, fetchSystemSettings } from '../actions/system';
 import Homepage from '../components/Homepage.js';
 import {reset} from 'redux-form';
@@ -38,6 +38,12 @@ const mapDispatchToProps = (dispatch, ownProps) => {
     },
     nowPlayingRandom: () => {
       dispatch(selectNowPlaying("random",0));
+    },
+    deleteID: (id) => {
+      dispatch(deleteFromQueue("specific",id));
+    },
+    deleteAll: () => {
+      dispatch(deleteFromQueue("all",0));
     },
     enableSongRequests: () => {
       dispatch(toggleSongRequests(true));

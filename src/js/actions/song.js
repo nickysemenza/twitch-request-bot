@@ -78,3 +78,18 @@ export function selectNowPlaying(mode, id) {
       .then(json => dispatch(fetchSongQueue()))
   }
 }
+
+export function deleteFromQueue(mode, id) {
+  return (dispatch, getState) => {
+    const token = getState().user.jwt_token;
+    return fetch(`${API_BASE_URL}/song/delete/${mode}/${id}?token=${token}`,{
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      }
+    })
+      .then(response => response.json())
+      .then(json => dispatch(fetchSongQueue()))
+  }
+}
