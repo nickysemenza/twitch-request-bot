@@ -12,5 +12,4 @@ class UserSettingsPage extends Component {
   }
 }
 
-
 export default UserSettingsPage;

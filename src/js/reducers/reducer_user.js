@@ -8,8 +8,7 @@ import {
   RECEIVE_USER_LIST,
 } from '../actions/users';
 
-import { decodeJWT } from '../Utils'
-
+import { decodeJWT } from '../Utils';
 
 const INITIAL_STATE = {user: null, status:null, error:null, loading: false};
 
@@ -22,7 +21,6 @@ export default function(state = INITIAL_STATE, action) {
     case SIGNIN_USER_FAILURE:// return error and make loading = false
     error = action.payload.data || {message: action.payload.message};//2nd one is network or server down errors
     return { ...state, me: null, status:'signin', error:error, loading: false};
-
 
     case REQUEST_ME:
       return { ...state,

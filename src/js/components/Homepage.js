@@ -59,8 +59,8 @@ export default class Homepage extends Component {
     let disableChatEmbedButton =    <button className="button-primary-wide" onClick={this.disableChatEmbed}>hide chat</button>;
     let enableChatEmbedButton =     <button className="button-primary-wide" onClick={this.enableChatEmbed}>show chat</button>;
 
-    let streamEmbed = <iframe className="col-lg-12 col-md-12 col-sm-12" src="https://player.twitch.tv/?channel=cheeseburger97" frameBorder="0" scrolling="no" height="378" width="100%"></iframe>;
-    let chatEmbed = <iframe className="col-lg-12 col-md-12 col-sm-12" src="https://www.twitch.tv/cheeseburger97/chat?popout=" frameBorder="0" scrolling="no" height="500" width="100%"></iframe>;
+    let streamEmbed = <iframe className="col-lg-12 col-md-12 col-sm-12" src="https://player.twitch.tv/?channel=cheeseburger97" frameBorder="0" scrolling="no" height="378" width="100%" />;
+    let chatEmbed = <iframe className="col-lg-12 col-md-12 col-sm-12" src="https://www.twitch.tv/cheeseburger97/chat?popout=" frameBorder="0" scrolling="no" height="500" width="100%" />;
 
     let queueControls = (
       <div>
@@ -84,14 +84,14 @@ export default class Homepage extends Component {
     if(!requestsEnabled) songFormHideReason = "song requests are not enabled right now!";
     if(!isLoggedIn) songFormHideReason = "login to request songs!";
     let songForm = (shouldShowSongForm ?
-      <div>
+      (<div>
         <p>{this.props.user.has_unplayed_song ? "Note: you currently have a song in the queue - requesting another song will replace it but maintain position." : ""}</p>
         <SongRequestForm onSubmit={this.handleSubmit} creditBalance={this.props.user.credits} />
-      </div>
+      </div>)
         :
-      <div>
+      (<div>
         {songFormHideReason}
-      </div>
+      </div>)
     );
 
     return(
@@ -128,8 +128,6 @@ export default class Homepage extends Component {
             </Col>
           </Row>
         </Grid>
-
-
 
     </div>);
   }

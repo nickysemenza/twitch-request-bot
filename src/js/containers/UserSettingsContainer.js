@@ -9,12 +9,10 @@ function mapStateToProps(state) {
   };
 }
 
-const mapDispatchToProps = (dispatch, ownProps) => {
-  return {
+const mapDispatchToProps = (dispatch, ownProps) => ({
     loadData: () => {
       dispatch(fetchMe());
     }
-  }
-}
+  });
 
 export default connect(mapStateToProps, mapDispatchToProps)(UserSettings);

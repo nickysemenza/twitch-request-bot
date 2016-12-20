@@ -1,11 +1,9 @@
-import React, { PropTypes } from 'react'
-import { browserHistory } from 'react-router'
-
-
+import React, { PropTypes } from 'react';
+import { browserHistory } from 'react-router';
 
 class AuthComponent extends React.Component {
   render() {
-    return <h1>loading...</h1>
+    return <h1>loading...</h1>;
   }
   componentDidMount() {
     this.props.processJWT(this.props.jwt);
@@ -23,4 +21,4 @@ class AuthComponent extends React.Component {
 
   }
 }
-export default AuthComponent
+export default AuthComponent;

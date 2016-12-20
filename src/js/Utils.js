@@ -1,6 +1,5 @@
 import { API_BASE_URL, API_VERBOSE} from './config';
 
-
 function urlBase64Decode(str) {
   if(str==undefined)
     return;
@@ -20,7 +19,6 @@ function urlBase64Decode(str) {
   return window.atob(output);
 }
 
-
 export function decodeJWT(token) {
 
   var user = {};
@@ -31,13 +29,12 @@ export function decodeJWT(token) {
   return user;
 }
 
-
 function completeRequest(route,config) {
   return fetch(API_BASE_URL+route, config)
-    .then(response =>
+    .then((response) =>
       response
         .json()
-        .then(body => ({ body, response }))
+        .then((body) => ({ body, response }))
     )
     .then(({ body, response }) =>  {
       if(API_VERBOSE) {

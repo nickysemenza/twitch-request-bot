@@ -1,31 +1,24 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux'
+import { connect } from 'react-redux';
 import { fetchMe, signInUserSuccess } from '../actions/users';
 import AuthComponent from '../components/AuthComponent';
 
-
-const mapStateToProps = (state, ownProps) => {
-  return {
+const mapStateToProps = (state, ownProps) => ({
     user: state.user
-  }
-}
+  });
 
-const mapDispatchToProps = (dispatch) => {
-  return {
+const mapDispatchToProps = (dispatch) => ({
     processJWT: (id) => {
-      dispatch(signInUserSuccess(id))
+      dispatch(signInUserSuccess(id));
     },
     getMe: (id) => {
-      dispatch(fetchMe(id))
+      dispatch(fetchMe(id));
     }
-  }
-}
-
-
+  });
 
 const AuthContainer = connect(
   mapStateToProps,
   mapDispatchToProps
 )(AuthComponent);
 
-export default AuthContainer
+export default AuthContainer;

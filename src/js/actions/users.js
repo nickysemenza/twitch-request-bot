@@ -22,22 +22,22 @@ export function fetchUserList() {
     const token = getState().user.jwt_token;
 
     return fetch(`${API_BASE_URL}/users?token=${token}`)
-      .then(response => response.json())
-      .then(json => dispatch(receiveUserList(json)))
-  }
+      .then((response) => response.json())
+      .then((json) => dispatch(receiveUserList(json)));
+  };
 }
 
 function requestUserList() {
   return {
     type: REQUEST_USER_LIST,
-  }
+  };
 }
 
 function receiveUserList(json) {
   return {
     type: RECEIVE_USER_LIST,
     users: json
-  }
+  };
 }
 
 export function giveUserCredits(id, points) {
@@ -50,11 +50,10 @@ export function giveUserCredits(id, points) {
         'Content-Type': 'application/json'
       }
     })
-      .then(response => response.json())
-      .then(json => dispatch(fetchUserList()))
-  }
+      .then((response) => response.json())
+      .then((json) => dispatch(fetchUserList()));
+  };
 }
-
 
 export function fetchMe() {
   return (dispatch, getState) => {
@@ -62,15 +61,15 @@ export function fetchMe() {
     const token = getState().user.jwt_token;
 
     return fetch(`${API_BASE_URL}/users/me?token=${token}`)
-      .then(response => response.json())
-      .then(json => dispatch(receiveMe(json)))
-  }
+      .then((response) => response.json())
+      .then((json) => dispatch(receiveMe(json)));
+  };
 }
 
 function requestMe() {
   return {
     type: REQUEST_ME,
-  }
+  };
 }
 
 function receiveMe(json) {
@@ -78,7 +77,7 @@ function receiveMe(json) {
     type: RECEIVE_ME,
     me: json,
     receivedAt: Date.now()
-  }
+  };
 }
 
 export function signInUser() {

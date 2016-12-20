@@ -3,16 +3,15 @@ import rootReducer from '../reducers';
 import thunkMiddleware from 'redux-thunk';
 import promise from 'redux-promise';
 import createLogger from 'redux-logger';
-import persistState from 'redux-localstorage'
+import persistState from 'redux-localstorage';
 
 export default function configureStore(initialState) {
 
   const logger = createLogger({
     predicate: (getState, action) => action.type.indexOf('redux-form') < 0
-  });;
+  });
   let middleware = applyMiddleware(thunkMiddleware, promise, logger);
   let enhancer;
-
 
   if (process.env.NODE_ENV !== 'production') {
     enhancer = compose(

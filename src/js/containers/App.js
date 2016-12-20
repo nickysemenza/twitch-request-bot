@@ -11,13 +11,10 @@ function mapStateToProps(state) {
   };
 }
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    resetMe: () =>{
+const mapDispatchToProps = (dispatch) => ({
+    resetMe: () => {
       dispatch(logoutUser());
     }
-  }
-}
-
+  });
 
 export default connect(mapStateToProps, mapDispatchToProps)(AppComponent);

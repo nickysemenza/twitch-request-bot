@@ -1,6 +1,5 @@
 import {API_BASE_URL} from '.././config';
 
-
 export const REQUEST_SYSTEM_SETTINGS = 'REQUEST_SYSTEM_SETTINGS';
 export const RECEIVE_SYSTEM_SETTINGS = 'RECEIVE_SYSTEM_SETTINGS';
 
@@ -10,15 +9,15 @@ export function fetchSystemSettings() {
     const token = getState().user.jwt_token;
 
     return fetch(`${API_BASE_URL}/system?token=${token}`)
-      .then(response => response.json())
-      .then(json => dispatch(receiveSystemSettings(json)))
-  }
+      .then((response) => response.json())
+      .then((json) => dispatch(receiveSystemSettings(json)));
+  };
 }
 
 function requestSystemSettings() {
   return {
     type: REQUEST_SYSTEM_SETTINGS,
-  }
+  };
 }
 
 function receiveSystemSettings(json) {
@@ -26,7 +25,7 @@ function receiveSystemSettings(json) {
     type: RECEIVE_SYSTEM_SETTINGS,
     data: json,
     receivedAt: Date.now()
-  }
+  };
 }
 
 export function toggleSongRequests(isEnabled) {
@@ -39,7 +38,7 @@ export function toggleSongRequests(isEnabled) {
         'Content-Type': 'application/json'
       }
     })
-      .then(response => response.json())
-      .then(json => dispatch(fetchSystemSettings()))
-  }
+      .then((response) => response.json())
+      .then((json) => dispatch(fetchSystemSettings()));
+  };
 }

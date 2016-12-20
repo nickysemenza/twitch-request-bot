@@ -1,7 +1,6 @@
 import {API_BASE_URL} from '.././config';
 import {TWITCH_CLIENT_ID} from '.././config';
 
-
 export const REQUEST_SONGQUEUE = 'REQUEST_SONGQUEUE';
 export const RECEIVE_SONGQUEUE = 'RECEIVE_SONGQUEUE';
 
@@ -11,15 +10,15 @@ export function fetchSongQueue() {
     const token = getState().user.jwt_token;
 
     return fetch(`${API_BASE_URL}/songqueue?token=${token}`)
-      .then(response => response.json())
-      .then(json => dispatch(receiveSongQueue(json)))
-  }
+      .then((response) => response.json())
+      .then((json) => dispatch(receiveSongQueue(json)));
+  };
 }
 
 function requestSongQueue() {
   return {
     type: REQUEST_SONGQUEUE,
-  }
+  };
 }
 
 function receiveSongQueue(json) {
@@ -27,7 +26,7 @@ function receiveSongQueue(json) {
     type: RECEIVE_SONGQUEUE,
     queue: json,
     receivedAt: Date.now()
-  }
+  };
 }
 
 export const ADD_SONG_REQUEST = 'ADDSONG_REQUEST';
@@ -44,25 +43,24 @@ export function addSong(formData) {
       },
       body: JSON.stringify(formData)
     })
-      .then(response => response.json())
-      .then(json => dispatch(requestAddSongSuccess(json)))
-  }
+      .then((response) => response.json())
+      .then((json) => dispatch(requestAddSongSuccess(json)));
+  };
 }
 
 function requestAddSong(options) {
   return {
     type: ADD_SONG_REQUEST,
     options: options
-  }
+  };
 }
 
 function requestAddSongSuccess(json) {
   return {
     type: ADD_SONG_REQUEST_SUCCESS,
     receivedAt: Date.now()
-  }
+  };
 }
-
 
 export function selectNowPlaying(mode, id) {
   return (dispatch, getState) => {
@@ -74,9 +72,9 @@ export function selectNowPlaying(mode, id) {
         'Content-Type': 'application/json'
       }
     })
-      .then(response => response.json())
-      .then(json => dispatch(fetchSongQueue()))
-  }
+      .then((response) => response.json())
+      .then((json) => dispatch(fetchSongQueue()));
+  };
 }
 
 export function deleteFromQueue(mode, id) {
@@ -89,7 +87,7 @@ export function deleteFromQueue(mode, id) {
         'Content-Type': 'application/json'
       }
     })
-      .then(response => response.json())
-      .then(json => dispatch(fetchSongQueue()))
-  }
+      .then((response) => response.json())
+      .then((json) => dispatch(fetchSongQueue()));
+  };
 }

@@ -9,15 +9,13 @@ function mapStateToProps(state) {
   };
 }
 
-const mapDispatchToProps = (dispatch, ownProps) => {
-  return {
+const mapDispatchToProps = (dispatch, ownProps) => ({
     loadUserList: () => {
       dispatch(fetchUserList());
     },
     giveCredits: (user_id, points) => {
       dispatch(giveUserCredits(user_id, points));
     },
-  }
-}
+  });
 
 export default connect(mapStateToProps, mapDispatchToProps)(AdminUsers);

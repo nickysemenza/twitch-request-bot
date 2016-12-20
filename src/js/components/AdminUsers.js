@@ -17,7 +17,6 @@ export default class AdminUsers extends Component {
     this.props.giveCredits(user_id,amt);
   }
 
-
   render() {
     let content;
 
@@ -32,7 +31,7 @@ export default class AdminUsers extends Component {
           <button className="button-primary" onClick={() => this.giveCredits(user.id,1)}>give 1</button>
           <button className="button-primary" onClick={() => this.giveCredits(user.id,5)}>give 5</button>
         </td>
-      </tr>)
+      </tr>);
     },this);
     const tableInstance = (
       <Table bordered condensed>

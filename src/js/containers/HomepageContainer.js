@@ -16,8 +16,7 @@ function mapStateToProps(state) {
   };
 }
 
-const mapDispatchToProps = (dispatch, ownProps) => {
-  return {
+const mapDispatchToProps = (dispatch, ownProps) => ({
     loadDataUser: () => {
       dispatch(fetchMe());
     },
@@ -57,6 +56,5 @@ const mapDispatchToProps = (dispatch, ownProps) => {
     resetRequestForm: () => {
       dispatch(reset('songrequest'));
     }
-  }
-}
+  });
 export default connect(mapStateToProps, mapDispatchToProps)(Homepage);

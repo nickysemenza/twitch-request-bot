@@ -4,9 +4,7 @@ import FontAwesome from 'react-fontawesome';
 
 export default class SongQueue extends Component {
 
-  truncString = (str, max, add='...') => {
-    return (typeof str === 'string' && str.length > max ? str.substring(0,max)+add : str);
-  };
+  truncString = (str, max, add='...') => (typeof str === 'string' && str.length > max ? str.substring(0,max)+add : str);
   render() {
     var list;
 

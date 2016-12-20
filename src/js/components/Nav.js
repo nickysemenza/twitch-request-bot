@@ -38,6 +38,6 @@ export default class MainNavBar extends Component {
           </Nav>
         </Navbar.Collapse>
       </Navbar>
-    )
+    );
   }
 }

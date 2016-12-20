@@ -12,5 +12,4 @@ class AdminUsersPage extends Component {
   }
 }
 
-
 export default AdminUsersPage;
