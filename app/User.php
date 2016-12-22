@@ -71,6 +71,9 @@ class User extends Authenticatable
         $sr->user_id = $this->id;
         $sr->youtube_id = $youtube_id;
         $sr->title = GeneralController::getYoutubeTitle($youtube_id);
+        if($sr->title == null)
+            return ['status'=>'error','error'=>'youtube video is bad'];
+
 
         if($is_priority) {
             //we want to use credit for new priority request, or editing a request to make it now priority

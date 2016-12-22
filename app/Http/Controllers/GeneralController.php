@@ -45,8 +45,17 @@ class GeneralController extends Controller {
         $url="https://www.googleapis.com/youtube/v3/videos?id=".$video_id."&part=snippet&key=".env('YOUTUBE_API_KEY');
         $client = new Client();
         $response = $client->request('GET', $url);
-        //TODO: error handling
-        return json_decode($response->getBody(),true)['items'][0]['snippet']['title'];
+        try {
+            $data = json_decode($response->getBody(),true);
+            if(array_key_exists(0,$data['items']))
+                $title = $data['items'][0]['snippet']['title'];
+            else
+                $title = null;
+        }
+        catch(Exception $e) {
+            $title = null;
+        }
+        return $title;
     }
     public function getSystemSettings() {
         return
