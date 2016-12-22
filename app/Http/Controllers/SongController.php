@@ -58,6 +58,21 @@ class SongController extends Controller {
         //no unplayed songs
         return ['no'];
     }
+    public function deleteSong(Request $request, $mode, $id) {
+        //todo: give back credits to person for deleted request
+        if(!Auth::user()->hasRole('admin'))//TODO middleware perhaps?
+            return ['not authorized'];
+        switch($mode) {
+            case "all":
+                SongRequest::where('status','=',SongRequest::NOT_PLAYED)->delete();
+                break;
+            case "specific":
+                SongRequest::find($id)->delete();
+                break;
+
+        }
+      return ['ok'];
+    }
     public static function requestsEnabled() {
         return SystemSetting::where('key',SystemSetting::REQUESTS_ENABLED)->first()->value;
     }

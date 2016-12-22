@@ -23,6 +23,7 @@ Route::post('system/requestsToggle/{mode}','GeneralController@requestsToggle');
 Route::get('songqueue', 'SongController@getSongQueue');
 Route::post('song', 'SongController@addSongRequest');
 Route::post('song/play/{which}/{id}', 'SongController@selectSongForPlaying');
+Route::post('song/delete/{which}/{id}', 'SongController@deleteSong');
 
 
 Route::post('irc/message', 'ChatController@incomingChatMessage');
