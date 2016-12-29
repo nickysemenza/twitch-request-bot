@@ -20,19 +20,18 @@ export default class SongQueue extends Component {
         let adminButtonDelete = (song.status == 0 && this.props.isAdmin) ? <button className='button-primary' onClick={() => this.props.delete(song.id)}>delete</button> : null;
         return (
           <div key={song.id} className='songListElementWrapper'>
-            <div className={stripeClass}>
-            </div>
+            <div className={stripeClass} />
             <div className='songListElementContent'>
               <div>
-                <FontAwesome name='youtube-play' style={{"margin-right":"3px"}} />
+                <FontAwesome name='youtube-play' style={{ 'margin-right':'3px' }} />
                 {youtubeLink}
               </div>
               <div>
                 {customInstrument}
               </div>
               <div>
-                <FontAwesome name='user' style={{"margin-right":"3px"}}/>
-                {song.priority ? <FontAwesome name='star' style={{"margin-right":"3px"}} /> : ''}
+                <FontAwesome name='user' style={{ 'margin-right':'3px' }} />
+                {song.priority ? <FontAwesome name='star' style={{ 'margin-right':'3px' }} /> : ''}
                 {song.user.username}
               </div>
               {adminButtonPlay}
