@@ -33,4 +33,20 @@ class TwitchAPIController extends Controller {
 		//TODO: error handling
 		return json_decode($response->getBody(),true)['access_token'];
 	}
+	public static function getUsersWatching() {
+        $client = new Client();
+        $response = $client->request('GET', 'https://tmi.twitch.tv/group/user/cheeseburger97/chatters', [
+            'form_params' => [
+                'client_id' => env('TWITCH_CLIENT_ID')
+
+            ]
+        ]);
+        $chatters = json_decode($response->getBody(),true)['chatters'];
+        $users = [];
+        foreach($chatters as $x) {
+            foreach ($x as $u)
+                $users[]=$u;
+        }
+        return $users;
+    }
 }

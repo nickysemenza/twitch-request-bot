@@ -39,4 +39,10 @@ class UsersController extends Controller {
         $user->giveCredits($credits,['admin-give'=>Auth::user()->id]);
         return ['ok'];
     }
+    public static function giveWatchingCredits() {
+        //TODO: make sure stream session is happening
+        foreach(TwitchAPIController::getUsersWatching() as $user) {
+            self::getByName($user)->giveCredits(1,"watching");
+        }
+    }
 }
