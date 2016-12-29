@@ -1,4 +1,4 @@
-import { API_BASE_URL, TWITCH_CLIENT_ID } from '.././config';
+import { API_BASE_URL, TWITCH_CLIENT_ID } from '../config';
 
 // Sign In User
 export const SIGNIN_USER = 'SIGNIN_USER';
