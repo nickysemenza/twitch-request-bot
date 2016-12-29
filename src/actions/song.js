@@ -1,10 +1,9 @@
-import {API_BASE_URL} from '.././config';
-import {TWITCH_CLIENT_ID} from '.././config';
+import { API_BASE_URL } from '.././config';
 
 export const REQUEST_SONGQUEUE = 'REQUEST_SONGQUEUE';
 export const RECEIVE_SONGQUEUE = 'RECEIVE_SONGQUEUE';
 
-export function fetchSongQueue() {
+export function fetchSongQueue () {
   return (dispatch, getState) => {
     dispatch(requestSongQueue());
     const token = getState().user.jwt_token;
@@ -15,13 +14,13 @@ export function fetchSongQueue() {
   };
 }
 
-function requestSongQueue() {
+function requestSongQueue () {
   return {
-    type: REQUEST_SONGQUEUE,
+    type: REQUEST_SONGQUEUE
   };
 }
 
-function receiveSongQueue(json) {
+function receiveSongQueue (json) {
   return {
     type: RECEIVE_SONGQUEUE,
     queue: json,
@@ -31,11 +30,11 @@ function receiveSongQueue(json) {
 
 export const ADD_SONG_REQUEST = 'ADDSONG_REQUEST';
 export const ADD_SONG_REQUEST_SUCCESS = 'ADDSONG_REQUEST_SUCCESS';
-export function addSong(formData) {
+export function addSong (formData) {
   return (dispatch, getState) => {
     const token = getState().user.jwt_token;
     dispatch(requestAddSong(formData));
-    return fetch(`${API_BASE_URL}/song?token=${token}`,{
+    return fetch(`${API_BASE_URL}/song?token=${token}`, {
       method: 'POST',
       headers: {
         'Accept': 'application/json',
@@ -48,24 +47,24 @@ export function addSong(formData) {
   };
 }
 
-function requestAddSong(options) {
+function requestAddSong (options) {
   return {
     type: ADD_SONG_REQUEST,
     options: options
   };
 }
 
-function requestAddSongSuccess(json) {
+function requestAddSongSuccess (json) {
   return {
     type: ADD_SONG_REQUEST_SUCCESS,
     receivedAt: Date.now()
   };
 }
 
-export function selectNowPlaying(mode, id) {
+export function selectNowPlaying (mode, id) {
   return (dispatch, getState) => {
     const token = getState().user.jwt_token;
-    return fetch(`${API_BASE_URL}/song/play/${mode}/${id}?token=${token}`,{
+    return fetch(`${API_BASE_URL}/song/play/${mode}/${id}?token=${token}`, {
       method: 'POST',
       headers: {
         'Accept': 'application/json',
@@ -77,10 +76,10 @@ export function selectNowPlaying(mode, id) {
   };
 }
 
-export function deleteFromQueue(mode, id) {
+export function deleteFromQueue (mode, id) {
   return (dispatch, getState) => {
     const token = getState().user.jwt_token;
-    return fetch(`${API_BASE_URL}/song/delete/${mode}/${id}?token=${token}`,{
+    return fetch(`${API_BASE_URL}/song/delete/${mode}/${id}?token=${token}`, {
       method: 'POST',
       headers: {
         'Accept': 'application/json',

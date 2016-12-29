@@ -2,11 +2,11 @@ import React, { Component } from 'react';
 import HeaderContainer from '../containers/HeaderContainer';
 import AdminUserContainer from '../containers/AdminUserContainer';
 class AdminUsersPage extends Component {
-  render() {
+  render () {
     return (
       <div>
-        <HeaderContainer/>
-        <AdminUserContainer/>
+        <HeaderContainer />
+        <AdminUserContainer />
       </div>
     );
   }

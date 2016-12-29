@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
-import {Link} from 'react-router';
+import { Link } from 'react-router';
 import HeaderContainer from '../containers/HeaderContainer';
 import HomepageContainer from '../containers/HomepageContainer';
 class Index extends Component {
-  render() {
+  render () {
     return (
       <div>
-        <HeaderContainer/>
-        <HomepageContainer/>
+        <HeaderContainer />
+        <HomepageContainer />
       </div>
     );
   }

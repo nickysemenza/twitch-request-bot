@@ -4,11 +4,11 @@ import {
   RECEIVE_SYSTEM_SETTINGS
 } from '../actions/system';
 
-const INITIAL_STATE = {system: null, error:null, loading: false};
+const INITIAL_STATE = { system: null, error:null, loading: false };
 
-export default function(state = INITIAL_STATE, action) {
+export default function (state = INITIAL_STATE, action) {
   let error;
-  switch(action.type) {
+  switch (action.type) {
     case REQUEST_SYSTEM_SETTINGS:
       return { ...state,
         isFetching: true,
@@ -22,6 +22,6 @@ export default function(state = INITIAL_STATE, action) {
         lastUpdated: action.receivedAt
       };
     default:
-    return state;
+      return state;
   }
 }

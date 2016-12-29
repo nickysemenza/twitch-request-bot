@@ -4,11 +4,11 @@ import {
   RECEIVE_SONGQUEUE
 } from '../actions/song';
 
-const INITIAL_STATE = {queue: null, error:null, loading: false};
+const INITIAL_STATE = { queue: null, error:null, loading: false };
 
-export default function(state = INITIAL_STATE, action) {
+export default function (state = INITIAL_STATE, action) {
   let error;
-  switch(action.type) {
+  switch (action.type) {
     case REQUEST_SONGQUEUE:
       return { ...state,
         isFetching: true,
@@ -22,6 +22,6 @@ export default function(state = INITIAL_STATE, action) {
         lastUpdated: action.receivedAt
       };
     default:
-    return state;
+      return state;
   }
 }

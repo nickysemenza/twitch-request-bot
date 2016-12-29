@@ -2,10 +2,10 @@ import React, { Component } from 'react';
 import UserSettingsContainer from '../containers/UserSettingsContainer.js';
 import HeaderContainer from '../containers/HeaderContainer';
 class UserSettingsPage extends Component {
-  render() {
+  render () {
     return (
       <div>
-        <HeaderContainer/>
+        <HeaderContainer />
         <UserSettingsContainer />
       </div>
     );

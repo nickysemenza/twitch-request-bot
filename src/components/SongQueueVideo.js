@@ -3,7 +3,7 @@ import YouTube from 'react-youtube';
 
 export default class SongQueueVideo extends Component {
 
-  render() {
+  render () {
     var videoid = this.props.song;
     const opts = {
       width: '100%',
@@ -15,6 +15,6 @@ export default class SongQueueVideo extends Component {
       videoId={videoid}
       opts={opts}
     />);
-    return(videoid ? player : null);
+    return (videoid ? player : null);
   }
 }

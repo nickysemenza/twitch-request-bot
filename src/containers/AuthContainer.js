@@ -4,17 +4,17 @@ import { fetchMe, signInUserSuccess } from '../actions/users';
 import AuthComponent from '../components/AuthComponent';
 
 const mapStateToProps = (state, ownProps) => ({
-    user: state.user
-  });
+  user: state.user
+});
 
 const mapDispatchToProps = (dispatch) => ({
-    processJWT: (id) => {
-      dispatch(signInUserSuccess(id));
-    },
-    getMe: (id) => {
-      dispatch(fetchMe(id));
-    }
-  });
+  processJWT: (id) => {
+    dispatch(signInUserSuccess(id));
+  },
+  getMe: (id) => {
+    dispatch(fetchMe(id));
+  }
+});
 
 const AuthContainer = connect(
   mapStateToProps,

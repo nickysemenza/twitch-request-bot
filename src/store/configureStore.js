@@ -1,12 +1,11 @@
 import { createStore, applyMiddleware, compose } from 'redux';
-import rootReducer from "../reducers";
+import rootReducer from '../reducers';
 import thunkMiddleware from 'redux-thunk';
 import promise from 'redux-promise';
 import createLogger from 'redux-logger';
 import persistState from 'redux-localstorage';
 
-export default function configureStore(initialState) {
-
+export default function configureStore (initialState) {
   const logger = createLogger({
     predicate: (getState, action) => action.type.indexOf('redux-form') < 0
   });
@@ -18,14 +17,13 @@ export default function configureStore(initialState) {
 
       // Middleware we want to use in development
       middleware,
-      window.devToolsExtension ?
-        window.devToolsExtension() :
-        require('../containers/DevTools').default.instrument(),
+      window.devToolsExtension
+        ? window.devToolsExtension()
+        : require('../containers/DevTools').default.instrument(),
       persistState()
     );
-  }
-  else {
-    enhancer = compose(middleware,persistState());
+  } else {
+    enhancer = compose(middleware, persistState());
   }
 
   const store = createStore(rootReducer, initialState, enhancer);

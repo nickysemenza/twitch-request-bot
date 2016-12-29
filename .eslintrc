@@ -19,9 +19,22 @@
     "__COVERAGE__" : false
   },
   "rules": {
+
+    //temp:
+
+    "eqeqeq" : 1,
+    "max-len": 0,
+    "camelcase": 0,
+    "no-useless-constructor": 0,
+    "no-unused-vars": 0,
+
+
+
     "key-spacing"          : 0,
     "jsx-quotes"           : [2, "prefer-single"],
-    "max-len"              : [2, 120, 2],
-    "object-curly-spacing" : [2, "always"]
+//    "max-len"              : [2, 120, 2],
+    "object-curly-spacing" : [2, "always"],
+    "semi"                 : [1, "always"],
+    "react/prop-types"     : [0]
   }
 }

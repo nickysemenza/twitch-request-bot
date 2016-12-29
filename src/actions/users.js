@@ -1,13 +1,11 @@
-import axios from 'axios';
-import {API_BASE_URL} from '.././config';
-import {TWITCH_CLIENT_ID} from '.././config';
+import { API_BASE_URL, TWITCH_CLIENT_ID } from '.././config';
 
-//Sign In User
+// Sign In User
 export const SIGNIN_USER = 'SIGNIN_USER';
 export const SIGNIN_USER_SUCCESS = 'SIGNIN_USER_SUCCESS';
 export const SIGNIN_USER_FAILURE = 'SIGNIN_USER_FAILURE';
 
-//log out user
+// log out user
 export const LOGOUT_USER = 'LOGOUT_USER';
 
 export const REQUEST_ME = 'REQUEST_ME';
@@ -16,7 +14,7 @@ export const RECEIVE_ME = 'RECEIVE_ME';
 export const REQUEST_USER_LIST = 'REQUEST_USER_LIST';
 export const RECEIVE_USER_LIST = 'RECEIVE_USER_LIST';
 
-export function fetchUserList() {
+export function fetchUserList () {
   return (dispatch, getState) => {
     dispatch(requestUserList());
     const token = getState().user.jwt_token;
@@ -27,23 +25,23 @@ export function fetchUserList() {
   };
 }
 
-function requestUserList() {
+function requestUserList () {
   return {
-    type: REQUEST_USER_LIST,
+    type: REQUEST_USER_LIST
   };
 }
 
-function receiveUserList(json) {
+function receiveUserList (json) {
   return {
     type: RECEIVE_USER_LIST,
     users: json
   };
 }
 
-export function giveUserCredits(id, points) {
+export function giveUserCredits (id, points) {
   return (dispatch, getState) => {
     const token = getState().user.jwt_token;
-    return fetch(`${API_BASE_URL}/users/${id}/givecredits/${points}?token=${token}`,{
+    return fetch(`${API_BASE_URL}/users/${id}/givecredits/${points}?token=${token}`, {
       method: 'POST',
       headers: {
         'Accept': 'application/json',
@@ -55,7 +53,7 @@ export function giveUserCredits(id, points) {
   };
 }
 
-export function fetchMe() {
+export function fetchMe () {
   return (dispatch, getState) => {
     dispatch(requestMe());
     const token = getState().user.jwt_token;
@@ -66,13 +64,13 @@ export function fetchMe() {
   };
 }
 
-function requestMe() {
+function requestMe () {
   return {
-    type: REQUEST_ME,
+    type: REQUEST_ME
   };
 }
 
-function receiveMe(json) {
+function receiveMe (json) {
   return {
     type: RECEIVE_ME,
     me: json,
@@ -80,28 +78,29 @@ function receiveMe(json) {
   };
 }
 
-export function signInUser() {
-  window.location=`https://api.twitch.tv/kraken/oauth2/authorize?response_type=code&client_id=${TWITCH_CLIENT_ID}&redirect_uri=${API_BASE_URL}/twitch_cb&scope=user_read&state=aaa`;
+export function signInUser () {
+  /* eslint max-len:0 */
+  window.location = `https://api.twitch.tv/kraken/oauth2/authorize?response_type=code&client_id=${TWITCH_CLIENT_ID}&redirect_uri=${API_BASE_URL}/twitch_cb&scope=user_read&state=aaa`;
   return {
     type: SIGNIN_USER
   };
 }
 
-export function signInUserSuccess(user) {
+export function signInUserSuccess (user) {
   return {
     type: SIGNIN_USER_SUCCESS,
     payload: user
   };
 }
 
-export function signInUserFailure(error) {
+export function signInUserFailure (error) {
   return {
     type: SIGNIN_USER_FAILURE,
     payload: error
   };
 }
 
-export function logoutUser() {
+export function logoutUser () {
   // localStorage.removeItem('id_token');
   return {
     type: LOGOUT_USER

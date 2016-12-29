@@ -3,12 +3,10 @@ import AuthContainer from '../containers/AuthContainer';
 import HeaderContainer from '../containers/HeaderContainer';
 
 class AuthPage extends Component {
-  render() {
-	// console.log(this.props.location.query.jwt);
-
+  render () {
     return (
       <div>
-        <HeaderContainer/>
+        <HeaderContainer />
         <AuthContainer jwt={this.props.location.query.jwt} />
       </div>
     );
