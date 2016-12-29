@@ -21,18 +21,18 @@ export default class SongQueue extends Component {
         return (
           <div key={song.id} className='songListElementWrapper'>
             <div className={stripeClass}>
-              {song.priority ? <FontAwesome name='star' /> : ''}
             </div>
             <div className='songListElementContent'>
               <div>
-                <FontAwesome name='youtube-play' />
+                <FontAwesome name='youtube-play' style={{"margin-right":"3px"}} />
                 {youtubeLink}
               </div>
               <div>
                 {customInstrument}
               </div>
               <div>
-                <FontAwesome name='user' />
+                <FontAwesome name='user' style={{"margin-right":"3px"}}/>
+                {song.priority ? <FontAwesome name='star' style={{"margin-right":"3px"}} /> : ''}
                 {song.user.username}
               </div>
               {adminButtonPlay}

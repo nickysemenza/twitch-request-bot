@@ -1,5 +1,5 @@
 body {
-  background: #1F2325;
+  background: #1D1F32;
   color: white;
   //padding-top: 30px;
   font-family: 'Roboto', sans-serif;
@@ -31,8 +31,7 @@ a:active {
 {
   border: none;
   transition-duration: 0.2s;
-  margin-top: 2px;
-  margin-bottom: 2px;
+  margin: 2px;
 }
 .button-primary
 {
@@ -87,26 +86,32 @@ a:active {
   align-items: center;
 }
 
+$songListDefault: #689BDD;
+$songListNowPlaying: #EF6356;
+$songListPriority: royalblue;
+$songListElementBackgroundColor: #4A4A6C;
 .songListElementStripe
 {
-  width: 50px;
-  height: 100px;
+  position: fixed;
+  width: 5px;
+  height: 40px;
   border: 1px;
+  margin-top: 30px;
   display: inline-block;
-  background-color: #689BDD;
+  background-color: $songListDefault;
   vertical-align: middle;
-  border-bottom-left-radius: 10px;
-  border-top-left-radius: 10px;
   padding-top: 10px;
-  padding-left: 20px;
+  border-bottom-right-radius: 3px;
+  border-top-right-radius: 3px;
+  //padding-left: 20px;
 }
 .songListElementStripe-nowPlaying {
   @extend .songListElementStripe;
-  background-color: #EF6356;
+  background-color: $songListNowPlaying;
 }
 .songListElementStripe-priority {
   @extend .songListElementStripe;
-  background-color: royalblue;
+  background-color: $songListPriority;
 }
 .songListElementContent {
   width: 350px;
@@ -114,12 +119,15 @@ a:active {
   border: 1px;
   vertical-align: middle;
   padding: 5px;
+  padding-left: 10px;
   white-space: normal;
 
   display: inline-block;
-  background-color: #444c60;
-  border-bottom-right-radius: 10px;
-  border-top-right-radius: 10px;
+  background-color: $songListElementBackgroundColor;
+  border-bottom-right-radius: 5px;
+  border-top-right-radius: 5px;
+  border-bottom-left-radius: 5px;
+  border-top-left-radius: 5px;
 }
 .songListElementWrapper {
   margin: 5px;

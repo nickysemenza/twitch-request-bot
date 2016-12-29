@@ -116,7 +116,6 @@
     "yargs": "^6.3.0"
   },
   "devDependencies": {
-    "axios": "~0.15.3",
     "babel-eslint": "^7.1.0",
     "babel-plugin-istanbul": "^3.0.0",
     "chai": "^3.4.1",
