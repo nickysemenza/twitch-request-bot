@@ -4,7 +4,7 @@ import { Link } from 'react-router';
 import { Navbar, NavItem, NavDropdown, Nav, MenuItem} from 'react-bootstrap';
 import { LinkContainer, IndexLinkContainer } from 'react-router-bootstrap';
 import './navbar.scss';
-export default class MainNavBar extends Component {
+export default class Header extends Component {
   render() {
     //APIget("users/me").then(a => console.log("BODY:",a));
     return (
