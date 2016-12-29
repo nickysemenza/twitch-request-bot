@@ -1,4 +1,4 @@
-import { API_BASE_URL } from '../config';
+import { API_BASE_URL } from 'config';
 
 export const REQUEST_SYSTEM_SETTINGS = 'REQUEST_SYSTEM_SETTINGS';
 export const RECEIVE_SYSTEM_SETTINGS = 'RECEIVE_SYSTEM_SETTINGS';

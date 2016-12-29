@@ -1,4 +1,4 @@
-import { API_BASE_URL } from '../config';
+import { API_BASE_URL } from 'config';
 
 export const REQUEST_SONGQUEUE = 'REQUEST_SONGQUEUE';
 export const RECEIVE_SONGQUEUE = 'RECEIVE_SONGQUEUE';
