@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Carbon\Carbon;
 use Log;
 use GuzzleHttp\Client;
 use Illuminate\Http\Request;
@@ -26,6 +27,9 @@ class ChatController extends Controller
     public static function processChatMessage($sender, $message)
     {
         $user = UsersController::getByName($sender);
+        //set the user's last_message attr to NOW
+        $user->last_message = Carbon::now();
+        $user->save();
         $atSender = '@'.$sender;
         $words = explode(' ', $message);
         Log::info($words);
@@ -37,7 +41,7 @@ class ChatController extends Controller
             case '!songrequest':
 
                 if ($user->hasUnplayedSong()) {
-                    self::sendChatMessage($atSender.' you have an unplayed request, please use !editrequest to change your request');
+                    self::sendChatMessage($atSender.' you have an unplayed request, please use !editsong to change your request');
                     break;
                 }
 
