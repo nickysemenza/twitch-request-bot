@@ -93,6 +93,8 @@ export default class Homepage extends Component {
         </div>)
         : (<div>
           {songFormHideReason}
+          {isLoggedIn ? '' : <TwitchLogin action={this.props.signin} />}
+
         </div>)
     );
 
@@ -101,15 +103,10 @@ export default class Homepage extends Component {
         <Grid>
           <Row className='show-grid'>
             <Col sm={6} md={6}>
-              {this.props.auth ? '' : <TwitchLogin action={this.props.signin} />}
-              {/* <br/> */}
-              {/* <button className="button-primary-wide" onClick={this.props.loadDataUser}>[debugreload] user</button> */}
-              {/* <br/> */}
-              {/* <button className="button-primary-wide" onClick={this.props.loadSongQueue}>[debugreload] queue</button> */}
-
-              <Panel header={<h3>Song requests</h3>} style={{ color: 'black' }}>
+              <h2>Request a Song!</h2>
+              <div className='songRequestPanel'>
                 {songForm}
-              </Panel>
+              </div>
               <SongQueueVideo song={nowPlaying ? nowPlaying.youtube_id : null} autoplay={this.props.isAdmin && this.state.shouldAutoPlay} />
             </Col>
             <Col sm={6} md={6}>

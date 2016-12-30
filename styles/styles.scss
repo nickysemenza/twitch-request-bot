@@ -38,12 +38,12 @@ a:active {
   @extend .button-plain;
   border: 2px solid #F75567;
   background: #F75567;
-  border-radius: 5px;
+  border-radius: 1px;
   color: white;
-  height: 30px;
+  height: 25px;
   width: 100px;
-  font-size: 16px;
-  font-weight:200;
+  font-size: 14px;
+  font-weight:100;
   text-transform:uppercase;
 }
 .button-primary:hover {
@@ -55,9 +55,18 @@ a:active {
 .button-primary-wide
 {
   @extend .button-primary;
-  width: 200px;
+  width: 150px;
 }
 
+
+.button-secondary {
+  @extend .button-plain;
+  background: #1D1F32;
+}
+.button-secondary:disabled {
+  background: #283658;
+  color: grey;
+}
 .light-textbox
 {
   border: 0;
@@ -86,13 +95,27 @@ a:active {
   align-items: center;
 }
 
+.songRequestPanel {
+  background-color: #4A4A6C;
+  color: white;
+  border-radius: 5px;
+  padding: 5px;
+  margin-bottom: 10px;
+}
+.songRequestFormError {
+  color: #ff8d73;
+  margin-left: 3px;
+}
+.songRequestFormText {
+  color: black;
+}
 $songListDefault: #689BDD;
 $songListNowPlaying: #EF6356;
 $songListPriority: royalblue;
 $songListElementBackgroundColor: #4A4A6C;
 .songListElementStripe
 {
-  position: fixed;
+  position: absolute;
   width: 5px;
   height: 40px;
   border: 1px;

@@ -20,10 +20,10 @@ const validate = (values) => {
 
 const renderField = ({ input, label, type, meta: { touched, error } }) => (
   <div>
-    <label>{label}</label>
+    {/* <label>{label}</label> */}
     <div>
-      <input {...input} placeholder={label} type={type} />
-      {touched && error && <span>{error}</span>}
+      <input {...input} placeholder={label} type={type} className='songRequestFormText' />
+      {touched && error && <span className='songRequestFormError'>{error}</span>}
     </div>
   </div>
 );
@@ -31,9 +31,9 @@ const renderField = ({ input, label, type, meta: { touched, error } }) => (
 let SongRequestForm = (props) => {
   const { error, handleSubmit, pristine, reset, submitting, pointsTotal, valid } = props;
   return (
-    <form onSubmit={handleSubmit} style={{ color: 'black' }}>
+    <form onSubmit={handleSubmit}>
       <div>
-        <Field name='youtube_url' component={renderField} type='text' label='Youtube URL' />
+        <Field name='youtube_url' component={renderField} type='text' className='SongRequestFormText' label='Youtube URL' />
       </div>
       <div>
         <label htmlFor='use_priority'>Make Request Priority?  (+500pts)</label>
@@ -42,12 +42,20 @@ let SongRequestForm = (props) => {
       <div>
         <label htmlFor='instrument'>Select Instrument (+500pts)</label>
         <div>
-          <Field name='instrument' component='input' type='text' placeholder='pick any instrument' />
+          <Field name='instrument' component={renderField} type='text' class='SongRequestFormText' label='pick any instrument' />
         </div>
       </div>
-      <p>You have {props.creditBalance} request credits. {(pointsTotal > props.creditBalance) ? 'Looks like you need more!' : ''}</p>
-      <button type='submit' disabled={pristine || submitting || !valid || (pointsTotal > props.creditBalance)}>Submit for {pointsTotal} points</button>
-      <button type='button' disabled={pristine || submitting} onClick={reset}>Clear Values</button>
+      <p>
+        You have {props.creditBalance} request credits.
+        <span className='songRequestFormError'>
+          {
+            pointsTotal > props.creditBalance
+            ? 'Looks like you need more!'
+            : ''}
+        </span>
+      </p>
+      <button className='button-secondary' type='submit' disabled={pristine || submitting || !valid || (pointsTotal > props.creditBalance)}>Submit for {pointsTotal} points</button>
+      <button className='button-secondary' type='button' disabled={pristine || submitting} onClick={reset}>Clear Values</button>
     </form>
   );
 };
