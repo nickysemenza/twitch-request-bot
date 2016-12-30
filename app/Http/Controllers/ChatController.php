@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use Log;
 use GuzzleHttp\Client;
 use Illuminate\Http\Request;
-use Log;
 
 class ChatController extends Controller
 {
@@ -76,7 +76,7 @@ class ChatController extends Controller
                 self::sendChatMessage($atSender.' please visit '.env('FRONTEND_ADDRESS').' to view the queue');
                 break;
             case '!editsong':
-                if (!$user->hasUnplayedSong()) {
+                if (! $user->hasUnplayedSong()) {
                     self::sendChatMessage($atSender." you don't have any unplayed requests!");
                     break;
                 }

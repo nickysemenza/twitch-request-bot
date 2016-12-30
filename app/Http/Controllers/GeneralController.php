@@ -2,14 +2,13 @@
 
 namespace App\Http\Controllers;
 
-
-use App\SystemSetting;
-use App\User;
+use Log;
 use Auth;
+use JWTAuth;
+use App\User;
+use App\SystemSetting;
 use GuzzleHttp\Client;
 use Illuminate\Http\Request;
-use JWTAuth;
-use Log;
 
 class GeneralController extends Controller
 {
@@ -81,7 +80,7 @@ class GeneralController extends Controller
 
     public function requestsToggle($mode)
     {
-        if (!Auth::user()->hasRole('admin')) {//TODO middleware perhaps?
+        if (! Auth::user()->hasRole('admin')) {//TODO middleware perhaps?
             return ['not authorized'];
         }
         $setting = SystemSetting::where('key', SystemSetting::REQUESTS_ENABLED)->first();

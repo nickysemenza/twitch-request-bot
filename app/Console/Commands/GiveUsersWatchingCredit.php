@@ -2,8 +2,8 @@
 
 namespace App\Console\Commands;
 
-use App\Http\Controllers\UsersController;
 use Illuminate\Console\Command;
+use App\Http\Controllers\UsersController;
 
 class GiveUsersWatchingCredit extends Command
 {
