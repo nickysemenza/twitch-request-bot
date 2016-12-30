@@ -91,7 +91,7 @@ class User extends Authenticatable
         if ($is_priority) {
             //we want to use credit for new priority request, or editing a request to make it now priority
             if (($isUpdateRequest && ! $sr->priority) || ! $isUpdateRequest) {
-                $numCreditsUsed += 5;
+                $numCreditsUsed += GeneralController::REQUEST_COST_PRIORITY;
             }
             $sr->priority = true;
         }
@@ -100,7 +100,7 @@ class User extends Authenticatable
             $instrument = $options['instrument'];
             if ($instrument != 'none' && $instrument != '') {
                 if (! $isUpdateRequest || ($isUpdateRequest && ! $sr->instrument)) {
-                    $numCreditsUsed += 5;
+                    $numCreditsUsed += GeneralController::REQUEST_COST_INSTRUMENT;
                 }
                 $sr->instrument = $instrument;
             }

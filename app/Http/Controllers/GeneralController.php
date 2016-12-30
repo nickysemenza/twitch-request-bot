@@ -12,6 +12,9 @@ use Illuminate\Http\Request;
 
 class GeneralController extends Controller
 {
+    const REQUEST_COST_INSTRUMENT = 5;
+    const REQUEST_COST_PRIORITY = 5;
+
     public function __construct()
     {
         $this->middleware('jwt.auth', ['except' => ['twitchAuthCallback', 'test', 'getSystemSettings']]);
