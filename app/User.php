@@ -2,11 +2,11 @@
 
 namespace App;
 
-use App\Http\Controllers\GeneralController;
-use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Notifications\Notifiable;
 use Log;
+use Illuminate\Notifications\Notifiable;
+use App\Http\Controllers\GeneralController;
 use Zizaco\Entrust\Traits\EntrustUserTrait;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class User extends Authenticatable
 {
@@ -90,7 +90,7 @@ class User extends Authenticatable
 
         if ($is_priority) {
             //we want to use credit for new priority request, or editing a request to make it now priority
-            if (($isUpdateRequest && !$sr->priority) || !$isUpdateRequest) {
+            if (($isUpdateRequest && ! $sr->priority) || ! $isUpdateRequest) {
                 $numCreditsUsed += 5;
             }
             $sr->priority = true;
@@ -99,7 +99,7 @@ class User extends Authenticatable
         if (isset($options['instrument'])) {
             $instrument = $options['instrument'];
             if ($instrument != 'none' && $instrument != '') {
-                if (!$isUpdateRequest || ($isUpdateRequest && !$sr->instrument)) {
+                if (! $isUpdateRequest || ($isUpdateRequest && ! $sr->instrument)) {
                     $numCreditsUsed += 5;
                 }
                 $sr->instrument = $instrument;
