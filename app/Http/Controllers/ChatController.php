@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use Carbon\Carbon;
 use Log;
+use Carbon\Carbon;
 use GuzzleHttp\Client;
 use Illuminate\Http\Request;
 

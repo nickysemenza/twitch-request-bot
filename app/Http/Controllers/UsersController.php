@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use Log;
 use Auth;
 use App\Role;
 use App\User;
-use Log;
 use Carbon\Carbon;
 
 class UsersController extends Controller
@@ -63,9 +63,10 @@ class UsersController extends Controller
         foreach (TwitchAPIController::getUsersWatching() as $username) {
             $user = self::getByName($username);
             $minutes_since_active = Carbon::now()->diffInMinutes($user->last_message);
-            Log::info($username." last active ".$minutes_since_active." minutes ago");
-            if($minutes_since_active < GeneralController::WATCHING_CREDITS_MINUTE_CUTOFF)// if they were active in the last X
+            Log::info($username.' last active '.$minutes_since_active.' minutes ago');
+            if ($minutes_since_active < GeneralController::WATCHING_CREDITS_MINUTE_CUTOFF) {// if they were active in the last X
                 $user->giveCredits(1, 'watching');
+            }
         }
     }
 }
