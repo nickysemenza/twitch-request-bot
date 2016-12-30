@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo todo && exit 0"
+    "test": "echo todo && npm run lint",
+    "lint": "eslint *.js"
   },
   "author": "",
   "license": "ISC",
@@ -13,5 +14,10 @@
     "express": "^4.14.0",
     "irc": "^0.5.2",
     "request": "^2.78.0"
+  },
+  "devDependencies": {
+    "eslint": "^3.12.2",
+    "eslint-config-airbnb-base": "^11.0.0",
+    "eslint-plugin-import": "^2.2.0"
   }
 }
