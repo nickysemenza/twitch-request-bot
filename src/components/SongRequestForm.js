@@ -36,11 +36,11 @@ let SongRequestForm = (props) => {
         <Field name='youtube_url' component={renderField} type='text' label='Youtube URL' />
       </div>
       <div>
-        <label htmlFor='use_priority'>Make Request Priority?  (+5pts)</label>
+        <label htmlFor='use_priority'>Make Request Priority?  (+500pts)</label>
         <Field name='use_priority' component='input' type='checkbox' />
       </div>
       <div>
-        <label htmlFor='instrument'>Select Instrument (+5pts)</label>
+        <label htmlFor='instrument'>Select Instrument (+500pts)</label>
         <div>
           <Field name='instrument' component='input' type='text' placeholder='pick any instrument' />
         </div>
@@ -64,11 +64,11 @@ SongRequestForm = connect(
     // can select values individually
     var pointsTotal = 0;
     if (selector(state, 'use_priority')) {
-      pointsTotal += 5;
+      pointsTotal += 500;
     }
     let instrument = selector(state, 'instrument');
     if (instrument != '' && instrument !== undefined) {
-      pointsTotal += 5;
+      pointsTotal += 500;
     }
     return {
       pointsTotal

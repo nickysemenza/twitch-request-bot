@@ -28,8 +28,8 @@ export default class AdminUsers extends Component {
           <td>{user.credits}</td>
           <td>{user.is_subscriber}</td>
           <td>
-            <button className='button-primary' onClick={() => this.giveCredits(user.id, 1)}>give 1</button>
-            <button className='button-primary' onClick={() => this.giveCredits(user.id, 5)}>give 5</button>
+            <button className='button-primary' onClick={() => this.giveCredits(user.id, 100)}>give 100</button>
+            <button className='button-primary' onClick={() => this.giveCredits(user.id, 500)}>give 500</button>
           </td>
         </tr>);
       }, this);
