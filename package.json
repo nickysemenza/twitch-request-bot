@@ -2,7 +2,9 @@
   "private": true,
   "scripts": {
     "prod": "gulp --production",
-    "dev": "gulp watch"
+    "dev": "gulp watch",
+    "testcov": "vendor/bin/phpunit --verbose --coverage-text --coverage-html=coverage",
+    "test": "vendor/bin/phpunit --verbose"
   },
   "devDependencies": {
     "bootstrap-sass": "^3.3.7",
