@@ -1,79 +1,96 @@
-<?php namespace App\Http\Controllers;
-use App\Http\Controllers\Controller;
-use App\Role;
+<?php
+
+namespace App\Http\Controllers;
+
+
 use App\SongRequest;
 use App\SystemSetting;
-use Illuminate\Http\Request;
-use GuzzleHttp\Client;
-use Auth;
 use App\User;
+use Auth;
+use Illuminate\Http\Request;
 use Log;
-use JWTAuth;
-class SongController extends Controller {
-    public function __construct() {
+
+class SongController extends Controller
+{
+    public function __construct()
+    {
         $this->middleware('jwt.auth', ['except' => ['getSongQueue']]);
     }
 
-	public function getSongQueue() {
-	    return SongRequest::
+    public function getSongQueue()
+    {
+        return SongRequest::
         with(
             [
-                'user'=>function($query) {
-                    $query->select('id','username');//we ony want to grab id, username, so we don't leak credits
-                }
+                'user'=> function ($query) {
+                    $query->select('id', 'username'); //we ony want to grab id, username, so we don't leak credits
+                },
             ]
-        )->where('status','!=',SongRequest::PLAYED)->orderBy('priority','DESC')->get();
+        )->where('status', '!=', SongRequest::PLAYED)->orderBy('priority', 'DESC')->get();
     }
-    public function addSongRequest(Request $request) {
-//        Log::info($request->all());
+
+    public function addSongRequest(Request $request)
+    {
+        //        Log::info($request->all());
         $user = Auth::user();
         $url = $request->get('youtube_url');
         $options = ['instrument'=>$request->get('instrument')];
-        $result = $user->requestSong($url,$request->get('use_priority'),$options);
+        $result = $user->requestSong($url, $request->get('use_priority'), $options);
+
         return $result;
     }
-    public function selectSongForPlaying(Request $request, $mode, $id) {
-        if(!Auth::user()->hasRole('admin'))//TODO middleware perhaps?
+
+    public function selectSongForPlaying(Request $request, $mode, $id)
+    {
+        if (!Auth::user()->hasRole('admin')) {//TODO middleware perhaps?
             return ['not authorized'];
-        switch($mode) {
-            case "first":
-                $sr = SongRequest::where('status','=',SongRequest::NOT_PLAYED)->orderBy('priority','DESC')->first();
+        }
+        switch ($mode) {
+            case 'first':
+                $sr = SongRequest::where('status', '=', SongRequest::NOT_PLAYED)->orderBy('priority', 'DESC')->first();
                 break;
-            case "random":
-                $sr = SongRequest::where('status','=',SongRequest::NOT_PLAYED)->inRandomOrder()->first();
+            case 'random':
+                $sr = SongRequest::where('status', '=', SongRequest::NOT_PLAYED)->inRandomOrder()->first();
                 break;
-            case "specific":
+            case 'specific':
                 $sr = SongRequest::find($id);
                 break;
             default:
                 //default to random
-                $sr = SongRequest::where('status','=',SongRequest::NOT_PLAYED)->orderBy('priority','DESC')->first();
+                $sr = SongRequest::where('status', '=', SongRequest::NOT_PLAYED)->orderBy('priority', 'DESC')->first();
                 break;
 
         }
-        if($sr) {
+        if ($sr) {
             $sr->setNowPlaying();
+
             return ['ok'];
         }
         //no unplayed songs
         return ['no'];
     }
-    public function deleteSong(Request $request, $mode, $id) {
+
+    public function deleteSong(Request $request, $mode, $id)
+    {
         //todo: give back credits to person for deleted request
-        if(!Auth::user()->hasRole('admin'))//TODO middleware perhaps?
+        if (!Auth::user()->hasRole('admin')) {//TODO middleware perhaps?
             return ['not authorized'];
-        switch($mode) {
-            case "all":
-                SongRequest::where('status','=',SongRequest::NOT_PLAYED)->delete();
+        }
+        switch ($mode) {
+            case 'all':
+                SongRequest::where('status', '=', SongRequest::NOT_PLAYED)->delete();
                 break;
-            case "specific":
+            case 'specific':
                 SongRequest::find($id)->delete();
                 break;
 
         }
-      return ['ok'];
+
+        return ['ok'];
     }
-    public static function requestsEnabled() {
-        return SystemSetting::where('key',SystemSetting::REQUESTS_ENABLED)->first()->value;
+
+    public static function requestsEnabled()
+    {
+        return SystemSetting::where('key', SystemSetting::REQUESTS_ENABLED)->first()->value;
     }
 }
