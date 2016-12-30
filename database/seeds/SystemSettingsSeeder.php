@@ -1,6 +1,8 @@
 <?php
-use Illuminate\Database\Seeder;
+
 use App\SystemSetting;
+use Illuminate\Database\Seeder;
+
 class SystemSettingsSeeder extends Seeder
 {
     /**

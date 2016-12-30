@@ -46,7 +46,7 @@ class Kernel extends HttpKernel
      */
     protected $routeMiddleware = [
         'bindings' => \Illuminate\Routing\Middleware\SubstituteBindings::class,
-        'can' => \Illuminate\Auth\Middleware\Authorize::class,
+        'can'      => \Illuminate\Auth\Middleware\Authorize::class,
 //        'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'jwt.auth' => 'Tymon\JWTAuth\Middleware\GetUserFromToken',
     ];
