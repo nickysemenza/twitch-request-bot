@@ -13,6 +13,7 @@
 */
 
 Route::get('twitch_cb', 'GeneralController@twitchAuthCallback');
+Route::get('twitchalerts_cb', 'GeneralController@twitchAlertsCallback');
 Route::get('test', 'GeneralController@test');
 
 Route::get('system', 'GeneralController@getSystemSettings');

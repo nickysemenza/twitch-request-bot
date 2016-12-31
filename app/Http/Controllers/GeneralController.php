@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use Log;
 use Auth;
 use JWTAuth;
-use App\User;
 use App\SystemSetting;
 use GuzzleHttp\Client;
 use Illuminate\Http\Request;
@@ -15,10 +14,11 @@ class GeneralController extends Controller
     const WATCHING_CREDITS_MINUTE_CUTOFF = 21;
     const REQUEST_COST_INSTRUMENT = 500;
     const REQUEST_COST_PRIORITY = 500;
+    const CREDITS_PER_DOLLAR = 100;
 
     public function __construct()
     {
-        $this->middleware('jwt.auth', ['except' => ['twitchAuthCallback', 'test', 'getSystemSettings']]);
+        $this->middleware('jwt.auth', ['except' => ['twitchAuthCallback', 'test', 'getSystemSettings','twitchAlertsCallback']]);
     }
 
     public static function getYoutubeVideoID($url)
@@ -51,6 +51,14 @@ class GeneralController extends Controller
 
         Log::info('issuing jwt for user '.$user->id.': '.$jwt);
         header('Location: '.env('FRONTEND_ADDRESS').'/auth?jwt='.$jwt);
+    }
+
+    public function twitchAlertsCallback(Request $request)
+    {
+        //todo: check auth...
+        $code = $request->all()['code'];
+        $result = TwitchAPIController::processTwitchAlertsAuthorizationCode($code);
+        return ["OK! go back to frontend now",$result];
     }
 
     public static function getYoutubeTitle($video_id)
