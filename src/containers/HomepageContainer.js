@@ -9,7 +9,7 @@ import { reset } from 'redux-form';
 function mapStateToProps (state) {
   return {
     user: state.user ? state.user.me : null,
-    auth: (state.user.status == 'authenticated' && state.user.me != null),
+    auth: (state.user.status === 'authenticated' && state.user.me != null),
     queue: state.song.queue,
     isAdmin: state.user.token_data ? state.user.token_data.roles.includes('admin') : false,
     requests_enabled: state.system.system ? state.system.system.settings.requests_enabled : false

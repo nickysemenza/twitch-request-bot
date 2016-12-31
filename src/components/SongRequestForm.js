@@ -75,7 +75,7 @@ SongRequestForm = connect(
       pointsTotal += 500;
     }
     let instrument = selector(state, 'instrument');
-    if (instrument != '' && instrument !== undefined) {
+    if (instrument !== '' && instrument !== undefined) {
       pointsTotal += 500;
     }
     return {

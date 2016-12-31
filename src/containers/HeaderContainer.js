@@ -4,7 +4,7 @@ import { logoutUser, signInUser } from '../actions/users';
 import MainNavBar from '../components/Nav.js';
 
 function mapStateToProps (state) {
-  let isAuthenticated = state.user.status == 'authenticated';
+  let isAuthenticated = state.user.status === 'authenticated';
   return {
     isAuthenticated: isAuthenticated,
     user: state.user,
