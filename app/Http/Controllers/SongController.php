@@ -55,7 +55,7 @@ class SongController extends Controller
                 $sr = SongRequest::find($id);
                 break;
             case 'stop':
-                SongRequest::where('status',SongRequest::PLAYING)->update(['status'=>SongRequest::PLAYED]);
+                SongRequest::where('status', SongRequest::PLAYING)->update(['status'=>SongRequest::PLAYED]);
                 $sr = null;
                 break;
             default:
