@@ -110,9 +110,33 @@ a:active {
   color: black;
 }
 $songListDefault: #689BDD;
-$songListNowPlaying: #EF6356;
-$songListPriority: royalblue;
+$songListNowPlaying: #53af41;
+$songListPriority: #EF6356;
 $songListElementBackgroundColor: #4A4A6C;
+
+.mini-circle {
+  border-radius: 50%;
+  width: 11px;
+  height: 11px;
+  display: inline-block;
+  margin-left: 4px;
+  margin-right: 4px;
+}
+.songListLegend-default {
+  @extend .mini-circle;
+  background-color: $songListDefault;
+}
+.songListLegend-nowPlaying {
+  @extend .mini-circle;
+  background-color: $songListNowPlaying;
+}
+.songListLegend-priority {
+  @extend .mini-circle;
+  background-color: $songListPriority;
+}
+.songListLegend-wrapper {
+  margin-bottom: 0px;
+}
 .songListElementStripe
 {
   position: absolute;

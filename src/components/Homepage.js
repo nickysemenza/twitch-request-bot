@@ -62,15 +62,13 @@ export default class Homepage extends Component {
     let chatEmbed = <iframe className='col-lg-12 col-md-12 col-sm-12' src='https://www.twitch.tv/cheeseburger97/chat?popout=' frameBorder='0' scrolling='no' height='500' width='100%' />;
 
     let queueControls = (
-      <div>
+      <div className='songRequestPanel'>
         <button className='button-primary-wide' onClick={this.props.nowPlayingFirst}>play first</button>
-        <br />
         <button className='button-primary-wide' onClick={this.props.nowPlayingRandom}>play random</button>
-        <hr />
         <br />
         <button className='button-primary-wide' onClick={this.props.enableSongRequests}>enable requests</button>
-        <br />
         <button className='button-primary-wide' onClick={this.props.disableSongRequests}>disable requests</button>
+        <br />
         <button className='button-primary-wide' onClick={this.props.deleteAll}>delete all!</button>
       </div>
     );
@@ -112,6 +110,11 @@ export default class Homepage extends Component {
             <Col sm={6} md={6}>
               {this.props.isAdmin ? queueControls : ''}
               <h2>Song Request Queue</h2>
+              <div>
+                <p className="songListLegend-wrapper"><div className="songListLegend-default"></div>Unplayed Request</p>
+                <p className="songListLegend-wrapper"><div className="songListLegend-priority"></div>Unplayed VIP Request</p>
+                <p className="songListLegend-wrapper"><div className="songListLegend-nowPlaying"></div>Now Playing</p>
+              </div>
               <SongQueue queue={this.props.queue} play={this.props.nowPlayingID} delete={this.props.deleteID} isAdmin={this.props.isAdmin} />
             </Col>
           </Row>
