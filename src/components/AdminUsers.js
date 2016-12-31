@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Grid, Row, Col, Table } from 'react-bootstrap';
-import PrettyJSON from './PrettyJSON';
+import moment from 'moment';
 export default class AdminUsers extends Component {
 
   constructor (props) {
@@ -9,7 +9,7 @@ export default class AdminUsers extends Component {
   componentDidMount = () => {
     setInterval(() => {
       this.props.loadUserList();
-    }, 3000);
+    }, 1000);
   };
 
   giveCredits (user_id, amt) {
@@ -26,11 +26,14 @@ export default class AdminUsers extends Component {
           <td>{user.id}</td>
           <td>{user.username}</td>
           <td>{user.credits}</td>
-          <td>{user.is_subscriber}</td>
+          {/* <td>{user.is_subscriber}</td> */}
           <td>
             <button className='button-primary' onClick={() => this.giveCredits(user.id, 100)}>give 100</button>
             <button className='button-primary' onClick={() => this.giveCredits(user.id, 500)}>give 500</button>
           </td>
+          <td>{user.minutes_watched}</td>
+          <td>{user.minutes_watched_active}</td>
+          <td>{moment.utc(user.last_message).fromNow()}</td>
         </tr>);
       }, this);
     }
@@ -41,8 +44,11 @@ export default class AdminUsers extends Component {
             <th>#</th>
             <th>username</th>
             <th># credits</th>
-            <th>is_subscriber</th>
+            {/* <th>is_subscriber</th> */}
             <th>give credits</th>
+            <th>minutes watched total </th>
+            <th>active minutes watched</th>
+            <th>last chat message</th>
           </tr>
         </thead>
         <tbody>
@@ -55,12 +61,9 @@ export default class AdminUsers extends Component {
 
         <Grid>
           <Row className='show-grid'>
-            <Col sm={6} md={6}>
-              {/* <button className="button-primary-wide" onClick={this.props.loadUserList}>[debugreload] user list</button> */}
+            <Col sm={12} md={12}>
+              <button className='button-primary-wide' onClick={this.props.loadUserList}>reload user list</button>
               {tableInstance}
-            </Col>
-            <Col sm={6} md={6}>
-              <PrettyJSON data={this.props.user_list} />
             </Col>
           </Row>
         </Grid>
