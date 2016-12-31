@@ -16,7 +16,7 @@ class Kernel extends ConsoleKernel
      */
     protected $commands = [
         GiveUsersWatchingCredit::class,
-        ProcessDonations::class
+        ProcessDonations::class,
         //
     ];
 
