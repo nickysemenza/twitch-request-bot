@@ -44,6 +44,9 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
   deleteAll: () => {
     dispatch(deleteFromQueue('all', 0));
   },
+  stopPlaying: () => {
+    dispatch(selectNowPlaying('stop', 0));
+  },
   enableSongRequests: () => {
     dispatch(toggleSongRequests(true));
   },

@@ -63,6 +63,7 @@ export default class Homepage extends Component {
 
     let queueControls = (
       <div className='songRequestPanel'>
+        <h3>Admin Controls</h3>
         <button className='button-primary-wide' onClick={this.props.nowPlayingFirst}>play first</button>
         <button className='button-primary-wide' onClick={this.props.nowPlayingRandom}>play random</button>
         <br />
@@ -70,6 +71,7 @@ export default class Homepage extends Component {
         <button className='button-primary-wide' onClick={this.props.disableSongRequests}>disable requests</button>
         <br />
         <button className='button-primary-wide' onClick={this.props.deleteAll}>delete all!</button>
+        <button className='button-primary-wide' onClick={this.props.stopPlaying}>finish current</button>
       </div>
     );
 
