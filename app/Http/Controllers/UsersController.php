@@ -64,7 +64,7 @@ class UsersController extends Controller
             $user = self::getByName($username);
             $minutes_since_active = Carbon::now()->diffInMinutes($user->last_message);
             Log::info($username.' last active '.$minutes_since_active.' minutes ago');
-            if ($minutes_since_active < GeneralController::WATCHING_CREDITS_MINUTE_CUTOFF+1) {// if they were active in the last X
+            if ($minutes_since_active < GeneralController::WATCHING_CREDITS_MINUTE_CUTOFF + 1) {// if they were active in the last X
                 $user->giveCredits(GeneralController::WATCHING_CREDITS_PER_N_MINUTES, 'watching');
             }
         }
