@@ -111,9 +111,9 @@ export default class Homepage extends Component {
               {this.props.isAdmin ? queueControls : ''}
               <h2>Song Request Queue</h2>
               <div>
-                <p className="songListLegend-wrapper"><div className="songListLegend-default"></div>Unplayed Request</p>
-                <p className="songListLegend-wrapper"><div className="songListLegend-priority"></div>Unplayed VIP Request</p>
-                <p className="songListLegend-wrapper"><div className="songListLegend-nowPlaying"></div>Now Playing</p>
+                <p className='songListLegend-wrapper'><div className='songListLegend-default' />Unplayed Request</p>
+                <p className='songListLegend-wrapper'><div className='songListLegend-priority' />Unplayed VIP Request</p>
+                <p className='songListLegend-wrapper'><div className='songListLegend-nowPlaying' />Now Playing</p>
               </div>
               <SongQueue queue={this.props.queue} play={this.props.nowPlayingID} delete={this.props.deleteID} isAdmin={this.props.isAdmin} />
             </Col>
