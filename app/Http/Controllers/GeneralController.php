@@ -11,10 +11,11 @@ use Illuminate\Http\Request;
 
 class GeneralController extends Controller
 {
-    const WATCHING_CREDITS_MINUTE_CUTOFF = 21;
+    const WATCHING_CREDITS_MINUTE_CUTOFF = 20;
     const REQUEST_COST_INSTRUMENT = 500;
     const REQUEST_COST_PRIORITY = 500;
     const CREDITS_PER_DOLLAR = 100;
+    const WATCHING_CREDITS_PER_N_MINUTES = 100;
 
     public function __construct()
     {
