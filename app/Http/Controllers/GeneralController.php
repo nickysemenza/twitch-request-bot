@@ -18,7 +18,7 @@ class GeneralController extends Controller
 
     public function __construct()
     {
-        $this->middleware('jwt.auth', ['except' => ['twitchAuthCallback', 'test', 'getSystemSettings','twitchAlertsCallback']]);
+        $this->middleware('jwt.auth', ['except' => ['twitchAuthCallback', 'test', 'getSystemSettings', 'twitchAlertsCallback']]);
     }
 
     public static function getYoutubeVideoID($url)
@@ -58,7 +58,8 @@ class GeneralController extends Controller
         //todo: check auth...
         $code = $request->all()['code'];
         $result = TwitchAPIController::processTwitchAlertsAuthorizationCode($code);
-        return ["OK! go back to frontend now",$result];
+
+        return ['OK! go back to frontend now', $result];
     }
 
     public static function getYoutubeTitle($video_id)
