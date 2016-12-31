@@ -54,6 +54,10 @@ class SongController extends Controller
             case 'specific':
                 $sr = SongRequest::find($id);
                 break;
+            case 'stop':
+                SongRequest::where('status',SongRequest::PLAYING)->update(['status'=>SongRequest::PLAYED]);
+                $sr = null;
+                break;
             default:
                 //default to random
                 $sr = SongRequest::where('status', '=', SongRequest::NOT_PLAYED)->orderBy('priority', 'DESC')->first();
