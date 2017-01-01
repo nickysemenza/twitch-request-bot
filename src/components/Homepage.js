@@ -81,10 +81,12 @@ export default class Homepage extends Component {
 
     let isLoggedIn = this.props.auth;
     let requestsEnabled = this.props.requests_enabled;
+    let isStreaming = this.props.is_streaming;
 
-    let shouldShowSongForm = isLoggedIn && requestsEnabled;
+    let shouldShowSongForm = isLoggedIn && requestsEnabled && isStreaming;
     let songFormHideReason;
     if (!requestsEnabled) songFormHideReason = 'song requests are not enabled right now!';
+    if (!isStreaming) songFormHideReason = 'not streaming right now!';
     if (!isLoggedIn) songFormHideReason = 'login to request songs!';
     let songForm = (shouldShowSongForm
         ? (<div>
