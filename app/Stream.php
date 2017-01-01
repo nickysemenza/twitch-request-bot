@@ -55,7 +55,7 @@ class Stream extends Model
     }
 
     /**
-     * returns whether or not there is a currently happening stream session
+     * returns whether or not there is a currently happening stream session.
      * @return bool
      */
     public static function isStreaming()
