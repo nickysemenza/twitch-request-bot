@@ -56,6 +56,7 @@ class GeneralController extends Controller
 
     public function twitchAlertsCallback(Request $request)
     {
+        return ['disabled'];
         //todo: check auth...
         $code = $request->all()['code'];
         $result = TwitchAPIController::processTwitchAlertsAuthorizationCode($code);

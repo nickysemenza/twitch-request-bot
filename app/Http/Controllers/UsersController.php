@@ -62,6 +62,8 @@ class UsersController extends Controller
         //TODO: make sure stream session is happening
         foreach (TwitchAPIController::getUsersWatching() as $username) {
             $user = self::getByName($username);
+            $user->last_seen = Carbon::now();
+            $user->save();
             $minutes_since_active = Carbon::now()->diffInMinutes($user->last_message);
             Log::info($username.' last active '.$minutes_since_active.' minutes ago');
             $user->increment('minutes_watched', GeneralController::WATCHING_CREDITS_MINUTE_CUTOFF);
