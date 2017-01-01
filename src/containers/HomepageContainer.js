@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { fetchMe, signInUser } from '../actions/users';
 import { fetchSongQueue, addSong, selectNowPlaying, deleteFromQueue } from '../actions/song';
-import { toggleSongRequests, fetchSystemSettings, toggleStreaming} from '../actions/system';
+import { toggleSongRequests, fetchSystemSettings, toggleStreaming } from '../actions/system';
 import Homepage from '../components/Homepage.js';
 import { reset } from 'redux-form';
 
