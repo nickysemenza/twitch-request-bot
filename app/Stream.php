@@ -1,10 +1,7 @@
 <?php
-
 namespace App;
-
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
-
 class Stream extends Model
 {
     /**
@@ -14,10 +11,8 @@ class Stream extends Model
     public static function getActiveID()
     {
         $stream = self::where('streaming', true)->first();
-
         return $stream ? $stream->id : null;
     }
-
     /**
      * Starts a stream session, if no active one exists.
      * @return bool success
@@ -31,10 +26,8 @@ class Stream extends Model
         $session = new self();
         $session->streaming = true;
         $session->save();
-
         return true;
     }
-
     /**
      * Finishes a stream session, if there is an active one.
      * @return bool
@@ -50,7 +43,6 @@ class Stream extends Model
         $active->streaming = false;
         $active->finished_at = Carbon::now();
         $active->save();
-
         return true;
     }
 }
