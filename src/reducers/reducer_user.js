@@ -28,15 +28,16 @@ export default function (state = INITIAL_STATE, action) {
         isFetching: true,
         didInvalidate: false
       };
-    case RECEIVE_ME:
+    case RECEIVE_ME:sou
+      let u = action.me;
       if ('error' in action.me) {
         console.log('oops');
-        return state;
+        u = null;
       }
       return { ...state,
         isFetching: false,
         didInvalidate: false,
-        me: action.me,
+        me: u,
         lastUpdated: action.receivedAt
       };
 
