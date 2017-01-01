@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Stream;
 use Log;
+use App\Stream;
 use Carbon\Carbon;
 use GuzzleHttp\Client;
 use Illuminate\Http\Request;
@@ -40,11 +40,11 @@ class ChatController extends Controller
         switch ($words[0]) {
             case '!sr':
             case '!songrequest':
-                if(!Stream::isStreaming()) {
+                if (! Stream::isStreaming()) {
                     self::sendChatMessage($atSender.' I am not streaming right now!');
                     break;
                 }
-                if(!SongController::requestsEnabled()) {
+                if (! SongController::requestsEnabled()) {
                     self::sendChatMessage($atSender.' requesting is not enabled right now!');
                     break;
                 }
@@ -89,11 +89,11 @@ class ChatController extends Controller
                 self::sendChatMessage($atSender.' please visit '.env('FRONTEND_ADDRESS').' to view the queue');
                 break;
             case '!editsong':
-                if(!Stream::isStreaming()) {
+                if (! Stream::isStreaming()) {
                     self::sendChatMessage($atSender.' I am not streaming right now!');
                     break;
                 }
-                if(!SongController::requestsEnabled()) {
+                if (! SongController::requestsEnabled()) {
                     self::sendChatMessage($atSender.' requesting is not enabled right now!');
                     break;
                 }
