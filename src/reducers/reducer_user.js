@@ -29,6 +29,8 @@ export default function (state = INITIAL_STATE, action) {
         didInvalidate: false
       };
     case RECEIVE_ME:
+      if(action.error)
+        return state;
       return { ...state,
         isFetching: false,
         didInvalidate: false,
