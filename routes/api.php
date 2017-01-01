@@ -18,6 +18,7 @@ Route::get('test', 'GeneralController@test');
 
 Route::get('system', 'GeneralController@getSystemSettings');
 Route::post('system/requestsToggle/{mode}', 'GeneralController@requestsToggle');
+Route::post('system/streamingToggle/{mode}', 'GeneralController@streamingToggle');
 
 Route::get('songqueue', 'SongController@getSongQueue');
 Route::post('song', 'SongController@addSongRequest');

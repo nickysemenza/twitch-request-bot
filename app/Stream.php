@@ -53,4 +53,13 @@ class Stream extends Model
 
         return true;
     }
+
+    /**
+     * returns whether or not there is a currently happening stream session
+     * @return bool
+     */
+    public static function isStreaming()
+    {
+        return self::getActiveID() !== null;
+    }
 }
