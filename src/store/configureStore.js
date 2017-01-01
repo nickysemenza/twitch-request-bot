@@ -9,21 +9,22 @@ export default function configureStore (initialState) {
   const logger = createLogger({
     predicate: (getState, action) => action.type.indexOf('redux-form') < 0
   });
-  let middleware = applyMiddleware(thunkMiddleware, promise, logger);
+  let middleware_dev = applyMiddleware(thunkMiddleware, promise, logger);
+  let middleware_prod = applyMiddleware(thunkMiddleware, promise);
   let enhancer;
 
   if (process.env.NODE_ENV !== 'production') {
     enhancer = compose(
 
       // Middleware we want to use in development
-      middleware,
+      middleware_dev,
       window.devToolsExtension
         ? window.devToolsExtension()
         : require('../containers/DevTools').default.instrument(),
       persistState()
     );
   } else {
-    enhancer = compose(middleware, persistState());
+    enhancer = compose(middleware_prod, persistState());
   }
 
   const store = createStore(rootReducer, initialState, enhancer);
