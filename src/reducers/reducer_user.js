@@ -29,7 +29,7 @@ export default function (state = INITIAL_STATE, action) {
         didInvalidate: false
       };
     case RECEIVE_ME:
-      if (action.me.error !== undefined) {
+      if (action.me.error === 'token_not_provided') {
         return state;
       }
       return { ...state,
