@@ -20,7 +20,7 @@ class CreateDonationsTable extends Migration
             $table->float('amount');
             $table->string('name');
             $table->boolean('processed')->default(false);
-            $table->timestamp('donated_at')->default(DB::raw('CURRENT_TIMESTAMP'));
+            $table->timestamp('donated_at')->nullable()->default(null);
             $table->timestamps();
         });
     }
