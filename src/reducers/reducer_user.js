@@ -29,7 +29,8 @@ export default function (state = INITIAL_STATE, action) {
         didInvalidate: false
       };
     case RECEIVE_ME:
-      if (action.me.error === 'token_not_provided') {
+      if ('error' in action.me) {
+        console.log('oops');
         return state;
       }
       return { ...state,

@@ -42,6 +42,12 @@
         "DEBUG": "app:*"
       }
     },
+    "deployquick": {
+      "command": "npm run clean && npm run compile",
+      "env": {
+        "DEBUG": "app:*"
+      }
+    },
     "deploy:dev": {
       "command": "npm run deploy",
       "env": {
@@ -51,6 +57,13 @@
     },
     "deploy:prod": {
       "command": "npm run deploy",
+      "env": {
+        "NODE_ENV": "production",
+        "DEBUG": "app:*"
+      }
+    },
+    "deploy:quick": {
+      "command": "npm run deployquick",
       "env": {
         "NODE_ENV": "production",
         "DEBUG": "app:*"
