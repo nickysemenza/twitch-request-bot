@@ -110,6 +110,7 @@ class User extends Authenticatable
                 $sr->instrument = $instrument;
             }
         }
+        $sr->stream_id = Stream::getActiveID();
 
         $sr->save();
         Log::info('need credits:'.$numCreditsUsed.' have: '.$this->credits);
