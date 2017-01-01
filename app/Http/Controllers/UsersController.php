@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Stream;
 use Log;
 use Auth;
 use App\Role;
 use App\User;
+use App\Stream;
 use Carbon\Carbon;
 
 class UsersController extends Controller
@@ -60,8 +60,9 @@ class UsersController extends Controller
 
     public static function giveWatchingCredits()
     {
-        if(!Stream::isStreaming())
+        if (! Stream::isStreaming()) {
             return;
+        }
         foreach (TwitchAPIController::getUsersWatching() as $username) {
             $user = self::getByName($username);
             $user->last_seen = Carbon::now();
