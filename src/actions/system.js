@@ -42,3 +42,17 @@ export function toggleSongRequests (isEnabled) {
       .then((json) => dispatch(fetchSystemSettings()));
   };
 }
+export function toggleStreaming (isStreamingNow) {
+  return (dispatch, getState) => {
+    const token = getState().user.jwt_token;
+    return fetch(`${API_BASE_URL}/system/streamingToggle/${isStreamingNow}?token=${token}`, {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      }
+    })
+      .then((response) => response.json())
+      .then((json) => dispatch(fetchSystemSettings()));
+  };
+}

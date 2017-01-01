@@ -67,11 +67,15 @@ export default class Homepage extends Component {
         <button className='button-primary-wide' onClick={this.props.nowPlayingFirst}>play first</button>
         <button className='button-primary-wide' onClick={this.props.nowPlayingRandom}>play random</button>
         <br />
-        <button className='button-primary-wide' onClick={this.props.enableSongRequests}>enable requests</button>
-        <button className='button-primary-wide' onClick={this.props.disableSongRequests}>disable requests</button>
+        <button className='button-primary-wide' onClick={this.props.enableSongRequests} disabled={this.props.requests_enabled}>enable requests</button>
+        <button className='button-primary-wide' onClick={this.props.disableSongRequests} disabled={!this.props.requests_enabled}>disable requests</button>
+        <br />
+        <button className='button-primary-wide' onClick={this.props.enableStreaming} disabled={this.props.is_streaming}>enable stream</button>
+        <button className='button-primary-wide' onClick={this.props.disableStreaming} disabled={!this.props.is_streaming}>disable stream</button>
         <br />
         <button className='button-primary-wide' onClick={this.props.deleteAll}>delete all!</button>
-        <button className='button-primary-wide' onClick={this.props.stopPlaying}>finish current</button>
+        <button className='button-primary-wide' onClick={this.props.stopPlaying} disabled={nowPlaying == null}>finish current</button>
+
       </div>
     );
 

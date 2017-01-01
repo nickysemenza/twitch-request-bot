@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { fetchMe, signInUser } from '../actions/users';
 import { fetchSongQueue, addSong, selectNowPlaying, deleteFromQueue } from '../actions/song';
-import { toggleSongRequests, fetchSystemSettings } from '../actions/system';
+import { toggleSongRequests, fetchSystemSettings, toggleStreaming} from '../actions/system';
 import Homepage from '../components/Homepage.js';
 import { reset } from 'redux-form';
 
@@ -12,7 +12,8 @@ function mapStateToProps (state) {
     auth: (state.user.status === 'authenticated' && state.user.me != null),
     queue: state.song.queue,
     isAdmin: state.user.token_data ? state.user.token_data.roles.includes('admin') : false,
-    requests_enabled: state.system.system ? state.system.system.settings.requests_enabled : false
+    requests_enabled: state.system.system ? state.system.system.settings.requests_enabled : false,
+    is_streaming: state.system.system ? state.system.system.settings.is_streaming : false
   };
 }
 
@@ -52,6 +53,12 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
   },
   disableSongRequests: () => {
     dispatch(toggleSongRequests(false));
+  },
+  enableStreaming: () => {
+    dispatch(toggleStreaming(true));
+  },
+  disableStreaming: () => {
+    dispatch(toggleStreaming(false));
   },
   loadSystem: () => {
     dispatch(fetchSystemSettings());

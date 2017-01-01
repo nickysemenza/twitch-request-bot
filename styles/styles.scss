@@ -52,6 +52,10 @@ a:active {
 .button-primary:active {
   background: rgba(247, 85, 103, 0.47);
 }
+.button-primary:disabled {
+  background: #582b3b;
+  color: grey;
+}
 .button-primary-wide
 {
   @extend .button-primary;
