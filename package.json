@@ -18,8 +18,10 @@
     "test": "better-npm-run test",
     "test:dev": "npm run test -- --watch",
     "deploy": "better-npm-run deploy",
+    "deployquick": "better-npm-run deployquick",
     "deploy:dev": "better-npm-run deploy:dev",
     "deploy:prod": "better-npm-run deploy:prod",
+    "deploy:quickprod": "better-npm-run deploy:quickprod",
     "codecov": "cat coverage/*/lcov.info | codecov"
   },
   "betterScripts": {
@@ -62,7 +64,7 @@
         "DEBUG": "app:*"
       }
     },
-    "deploy:quick": {
+    "deploy:quickprod": {
       "command": "npm run deployquick",
       "env": {
         "NODE_ENV": "production",
