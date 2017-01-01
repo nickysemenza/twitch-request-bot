@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Log;
 use App\User;
+use App\Stream;
 use App\Donation;
 use Carbon\Carbon;
 use App\SystemSetting;
@@ -231,6 +232,7 @@ class TwitchAPIController extends Controller
             $user = UsersController::getByName($d['name']); //todo what if null?
             $user->giveCredits(ceil($d['amount'] * GeneralController::CREDITS_PER_DOLLAR), ['donation'=>['id'=>$d['donation_id']]]);
             $d->processed = true;
+            $d->stream_id = Stream::getActiveID();
             $d->save();
         }
 

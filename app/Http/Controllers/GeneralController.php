@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Log;
 use Auth;
 use JWTAuth;
+use App\Stream;
 use App\SystemSetting;
 use GuzzleHttp\Client;
 use Illuminate\Http\Request;
@@ -89,6 +90,7 @@ class GeneralController extends Controller
         [
             'settings'=> [
                 SystemSetting::REQUESTS_ENABLED => SongController::requestsEnabled(),
+                'is_streaming' => Stream::isStreaming(),
             ],
         ];
     }
@@ -103,5 +105,17 @@ class GeneralController extends Controller
         $setting->save();
 
         return ['ok'];
+    }
+
+    public function streamingToggle($mode)
+    {
+        if (! Auth::user()->hasRole('admin')) {//TODO middleware perhaps?
+            return ['not authorized'];
+        }
+        if ($mode == 'true') {
+            return ['status'=>Stream::startSession()];
+        }
+
+        return ['status'=>Stream::finishSession()];
     }
 }
