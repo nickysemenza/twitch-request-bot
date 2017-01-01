@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Stream;
 use Log;
 use Auth;
 use JWTAuth;
+use App\Stream;
 use App\SystemSetting;
 use GuzzleHttp\Client;
 use Illuminate\Http\Request;
@@ -106,13 +106,16 @@ class GeneralController extends Controller
 
         return ['ok'];
     }
+
     public function streamingToggle($mode)
     {
         if (! Auth::user()->hasRole('admin')) {//TODO middleware perhaps?
             return ['not authorized'];
         }
-        if($mode == 'true')
+        if ($mode == 'true') {
             return ['status'=>Stream::startSession()];
+        }
+
         return ['status'=>Stream::finishSession()];
     }
 }
