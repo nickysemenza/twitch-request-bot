@@ -71,6 +71,9 @@ function requestMe () {
 }
 
 function receiveMe (json) {
+  if ('error' in json) {
+    json = null;
+  }
   return {
     type: RECEIVE_ME,
     me: json,
