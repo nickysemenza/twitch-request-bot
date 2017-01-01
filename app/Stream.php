@@ -26,7 +26,6 @@ class Stream extends Model
         $session = new self();
         $session->streaming = true;
         $session->save();
-
         return true;
     }
     /**
@@ -44,7 +43,6 @@ class Stream extends Model
         $active->streaming = false;
         $active->finished_at = Carbon::now();
         $active->save();
-
         return true;
     }
 }
