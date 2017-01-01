@@ -29,7 +29,7 @@ export default function (state = INITIAL_STATE, action) {
         didInvalidate: false
       };
     case RECEIVE_ME:
-      if (action.error) {
+      if (action.me.error) {
         return state;
       }
       return { ...state,
