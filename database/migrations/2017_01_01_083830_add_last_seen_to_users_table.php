@@ -14,7 +14,6 @@ class AddLastSeenToUsersTable extends Migration
     {
         Schema::table('users', function (Blueprint $table) {
             $table->timestamp('last_seen')->default(\Carbon\Carbon::now());
-
         });
     }
 
