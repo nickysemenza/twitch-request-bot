@@ -34,6 +34,7 @@ export default class AdminUsers extends Component {
           <td>{user.minutes_watched}</td>
           <td>{user.minutes_watched_active}</td>
           <td>{moment.utc(user.last_message).fromNow()}</td>
+          <td>{moment.utc(user.last_seen).fromNow()}</td>
         </tr>);
       }, this);
     }
@@ -49,6 +50,7 @@ export default class AdminUsers extends Component {
             <th>minutes watched total </th>
             <th>active minutes watched</th>
             <th>last chat message</th>
+            <th>last seen in chat</th>
           </tr>
         </thead>
         <tbody>
