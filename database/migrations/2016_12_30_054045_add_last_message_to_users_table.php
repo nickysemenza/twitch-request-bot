@@ -13,7 +13,7 @@ class AddLastMessageToUsersTable extends Migration
     public function up()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->timestamp('last_message')->default(\Carbon\Carbon::now());
+            $table->timestamp('last_message')->default(DB::raw('CURRENT_TIMESTAMP'));
         });
     }
 
