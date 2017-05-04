@@ -1,7 +1,7 @@
 language: php
 
 php:
-  - 5.6
+  # - 5.6
   - 7.0
 node_js: "7"
 before_install:
@@ -23,20 +23,36 @@ before_script:
   - php artisan migrate --env=testing --no-interaction -vvv
   - php artisan db:seed --env=testing --no-interaction -vvv
   - cd ..
+
   - cd frontend/
   - cp src/config.example.js src/config.js
+  - cd ..
+
+  - cd irc-relay/
+  - cp settings.example.js settings.js
+  - yarn install
   - cd ..
 script:
   - cd backend/
   - vendor/bin/phpunit --verbose --coverage-text --coverage-clover=coverage.xml
   - cd ..
+
   - cd frontend/
   - npm run deploy:prod
+  - cd ..
+
+  - cd irc-relay/
+  - npm test
   - cd ..
 after_success:
   - cd backend/
   - bash <(curl -s https://codecov.io/bash)
   - cd ..
+
   - cd frontend/
   - npm run codecov
+  - cd ..
+  
+  - cd irc-relay/
+  - bash <(curl -s https://codecov.io/bash)
   - cd ..
