@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use Log;
-use Auth;
-use App\User;
 use App\SongRequest;
 use App\SystemSetting;
+use App\User;
+use Auth;
 use Illuminate\Http\Request;
+use Log;
 
 class SongController extends Controller
 {
@@ -41,7 +41,7 @@ class SongController extends Controller
 
     public function selectSongForPlaying(Request $request, $mode, $id)
     {
-        if (! Auth::user()->hasRole('admin')) {//TODO middleware perhaps?
+        if (!Auth::user()->hasRole('admin')) {//TODO middleware perhaps?
             return ['not authorized'];
         }
         switch ($mode) {
@@ -76,7 +76,7 @@ class SongController extends Controller
     public function deleteSong(Request $request, $mode, $id)
     {
         //todo: give back credits to person for deleted request
-        if (! Auth::user()->hasRole('admin')) {//TODO middleware perhaps?
+        if (!Auth::user()->hasRole('admin')) {//TODO middleware perhaps?
             return ['not authorized'];
         }
         switch ($mode) {

@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use Log;
-use Auth;
 use App\Role;
-use App\User;
 use App\Stream;
+use App\User;
+use Auth;
 use Carbon\Carbon;
+use Log;
 
 class UsersController extends Controller
 {
@@ -19,7 +19,7 @@ class UsersController extends Controller
     public static function getByName($username)
     {
         $user = User::firstOrCreate(['username'=>$username]);
-        if (! $user->hasRole('user')) {
+        if (!$user->hasRole('user')) {
             $user->attachRole(Role::where('name', 'user')->first());
         }
 
@@ -36,7 +36,7 @@ class UsersController extends Controller
 
     public function getAll()
     {
-        if (! Auth::user()->hasRole('admin')) {//TODO middleware perhaps?
+        if (!Auth::user()->hasRole('admin')) {//TODO middleware perhaps?
             return ['not authorized'];
         }
         $users = User::all();
@@ -46,11 +46,11 @@ class UsersController extends Controller
 
     public function giveCredits($id, $credits)
     {
-        if (! Auth::user()->hasRole('admin')) {//TODO middleware perhaps?
+        if (!Auth::user()->hasRole('admin')) {//TODO middleware perhaps?
             return ['not authorized'];
         }
         $user = User::find($id);
-        if (! $user) {
+        if (!$user) {
             return ['user not found'];
         }
         $user->giveCredits($credits, ['admin-give'=>Auth::user()->id]);
@@ -60,7 +60,7 @@ class UsersController extends Controller
 
     public static function giveWatchingCredits()
     {
-        if (! Stream::isStreaming()) {
+        if (!Stream::isStreaming()) {
             return;
         }
         foreach (TwitchAPIController::getUsersWatching() as $username) {

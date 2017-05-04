@@ -9,6 +9,7 @@ class Stream extends Model
 {
     /**
      * Gets the active stream_id, or null.
+     *
      * @return int|null
      */
     public static function getActiveID()
@@ -20,6 +21,7 @@ class Stream extends Model
 
     /**
      * Starts a stream session, if no active one exists.
+     *
      * @return bool success
      */
     public static function startSession()
@@ -37,6 +39,7 @@ class Stream extends Model
 
     /**
      * Finishes a stream session, if there is an active one.
+     *
      * @return bool
      */
     public static function finishSession()
@@ -56,6 +59,7 @@ class Stream extends Model
 
     /**
      * returns whether or not there is a currently happening stream session.
+     *
      * @return bool
      */
     public static function isStreaming()
