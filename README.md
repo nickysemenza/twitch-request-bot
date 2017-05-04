@@ -1,13 +1,19 @@
-#Twitch Songrequest Bot
+# Twitch Songrequest Bot
+
+[![StyleCI](https://styleci.io/repos/73110359/shield?branch=master)](https://styleci.io/repos/73110359)
+[![Build Status](https://travis-ci.org/nickysemenza/twitch-request-bot.svg?branch=master)](https://travis-ci.org/nickysemenza/twitch-request-bot)
+[![codecov](https://codecov.io/gh/nickysemenza/twitch-request-bot/branch/master/graph/badge.svg)](https://codecov.io/gh/nickysemenza/twitch-request-bot)
+
+Used for cheeseburger.tv 
 
 
-##Components
+## Components
 
 1. IRC relay (node)
 2. Backend (API) server (php + laravel)
 3. Frontend web interface (react.js)
 
-###Dev Setup
+### Dev Setup
 
 Prereqs: `node`, `npm`, `composer` (php package manager), `mysql`
 
@@ -29,8 +35,14 @@ For the backend:
 4. `php artisan serve` to run, or point nginx to `public/index.php`
 5. `php artisan migrate` to build up the mysql tables
 6. `php artisan seed` (one-off) to populate the roles table
-****For the frontend:
-1. `cd frontend`
+7. setup the laravel scheduler with cron ([docs](laravel.com/docs/5.2/scheduling))
+
+
+****
+
+For the frontend:
+
+1. `cd frontend`
 2. `npm install`
 3. `npm start` to start the hotloader on :3000
 
@@ -38,7 +50,7 @@ For the backend:
 
 
 
-###Production
+### Production
 * run irc-relay's `server.js` with pm2
 * run backend the same, but with appropriate .env
 * for the frontend, run `npm run build`, then serve `build/index.html` via nginx
