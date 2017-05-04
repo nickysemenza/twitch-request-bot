@@ -9,7 +9,6 @@ use App\Donation;
 use Carbon\Carbon;
 use App\SystemSetting;
 use GuzzleHttp\Client;
-use Illuminate\Http\Request;
 
 class TwitchAPIController extends Controller
 {
@@ -18,9 +17,9 @@ class TwitchAPIController extends Controller
         $client = new Client();
         $response = $client->request('GET', 'https://api.twitch.tv/kraken/user', [
             'headers' => [
-                'Authorization' => "OAuth ".$token,
+                'Authorization' => 'OAuth '.$token,
                 'Client-ID'   => env('TWITCH_CLIENT_ID'),
-                'Accept' => "application/vnd.twitchtv.v5+json"
+                'Accept' => 'application/vnd.twitchtv.v5+json',
 
             ],
         ]);
