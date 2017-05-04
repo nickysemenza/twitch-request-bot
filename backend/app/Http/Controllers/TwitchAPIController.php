@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use Log;
-use App\User;
-use App\Stream;
 use App\Donation;
-use Carbon\Carbon;
+use App\Stream;
 use App\SystemSetting;
+use App\User;
+use Carbon\Carbon;
 use GuzzleHttp\Client;
+use Log;
 
 class TwitchAPIController extends Controller
 {
@@ -18,8 +18,8 @@ class TwitchAPIController extends Controller
         $response = $client->request('GET', 'https://api.twitch.tv/kraken/user', [
             'headers' => [
                 'Authorization' => 'OAuth '.$token,
-                'Client-ID'   => env('TWITCH_CLIENT_ID'),
-                'Accept' => 'application/vnd.twitchtv.v5+json',
+                'Client-ID'     => env('TWITCH_CLIENT_ID'),
+                'Accept'        => 'application/vnd.twitchtv.v5+json',
 
             ],
         ]);
@@ -66,7 +66,9 @@ class TwitchAPIController extends Controller
 
     /**
      * Generates access and refresh tokens from TwitchAlerts authorization code.
+     *
      * @param $code
+     *
      * @return string
      */
     public static function processTwitchAlertsAuthorizationCode($code)
@@ -98,6 +100,7 @@ class TwitchAPIController extends Controller
 
     /**
      * Saves TwitchAlerts access and refresh tokens.
+     *
      * @param $access_token
      * @param $refresh_token
      */
@@ -119,13 +122,14 @@ class TwitchAPIController extends Controller
 
     /**
      * Refreshes TwitchAlerts OAuth.
+     *
      * @return bool
      */
     public static function twitchAlertsRefresh()
     {
         $expires = SystemSetting::where('key', SystemSetting::DONATIONS_ACCESS_TOKEN_EXPIRES_AT)->first();
         $refresh = SystemSetting::where('key', SystemSetting::DONATIONS_REFRESH_TOKEN)->first();
-        if (! $expires || ! $refresh) {
+        if (!$expires || !$refresh) {
             return false; //oops
         }
         if (Carbon::parse($expires->value)->gt(Carbon::now()->copy()->addMinute(1))) {
@@ -159,6 +163,7 @@ class TwitchAPIController extends Controller
 
     /**
      * Retrieves all the donations from TwitchAlerts, paginating.
+     *
      * @return bool
      */
     public static function getDonations()
@@ -180,7 +185,9 @@ class TwitchAPIController extends Controller
 
     /**
      * Saved a page of donations, before a given donation_id (chronologically).
+     *
      * @param $before string donation_id
+     *
      * @return bool
      */
     public static function saveDonationsPage($before)
@@ -195,7 +202,7 @@ class TwitchAPIController extends Controller
                     'access_token'  => SystemSetting::where('key', SystemSetting::DONATIONS_ACCESS_TOKEN)->first()->value,
                     'limit'         => 50,
                     'currency'      => 'USD',
-                    'before' => $before,
+                    'before'        => $before,
                 ],
             ]);
 
@@ -224,6 +231,7 @@ class TwitchAPIController extends Controller
 
     /**
      * Processes the donations in the database; assigns credit to the users.
+     *
      * @return bool
      */
     public static function processDonations()
@@ -241,8 +249,10 @@ class TwitchAPIController extends Controller
 
     /**
      * Helps create a fake donation.
+     *
      * @param $user
      * @param $amt
+     *
      * @return status
      */
     public static function fakeDonation($user, $amt)
@@ -254,11 +264,11 @@ class TwitchAPIController extends Controller
             $response = $client->post('https://www.twitchalerts.com/api/v1.0/donations', [
                 'form_params' => [
                     'access_token'  => SystemSetting::where('key', SystemSetting::DONATIONS_ACCESS_TOKEN)->first()->value,
-                    'name' => $user,
-                    'identifier' => $user,
-                    'amount' => $amt,
-                    'currency' => 'USD',
-                    'message' => 'test for '.$user.'!',
+                    'name'          => $user,
+                    'identifier'    => $user,
+                    'amount'        => $amt,
+                    'currency'      => 'USD',
+                    'message'       => 'test for '.$user.'!',
                 ],
             ]);
 

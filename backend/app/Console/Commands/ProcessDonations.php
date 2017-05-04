@@ -2,8 +2,8 @@
 
 namespace App\Console\Commands;
 
-use Illuminate\Console\Command;
 use App\Http\Controllers\TwitchAPIController;
+use Illuminate\Console\Command;
 
 class ProcessDonations extends Command
 {
