@@ -17,9 +17,10 @@ class TwitchAPIController extends Controller
     {
         $client = new Client();
         $response = $client->request('GET', 'https://api.twitch.tv/kraken/user', [
-            'form_params' => [
-                'oauth_token' => $token,
-                'client_id'   => env('TWITCH_CLIENT_ID'),
+            'headers' => [
+                'Authorization' => "OAuth ".$token,
+                'Client-ID'   => env('TWITCH_CLIENT_ID'),
+                'Accept' => "application/vnd.twitchtv.v5+json"
 
             ],
         ]);
